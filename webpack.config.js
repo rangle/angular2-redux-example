@@ -4,6 +4,17 @@ const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const baseAppEntries = [
+  './src/index.ts',
+];
+
+const devAppEntries = [
+  'webpack-hot-middleware/client?reload=true',
+];
+
+const appEntries = baseAppEntries
+  .concat(process.env.NODE_ENV === 'development' ? devAppEntries : []);
+
 const basePlugins = [
   new webpack.DefinePlugin({
     __DEV__: process.env.NODE_ENV !== 'production',
@@ -17,7 +28,9 @@ const basePlugins = [
   })
 ];
 
-const devPlugins = [];
+const devPlugins = [
+  new webpack.HotModuleReplacementPlugin(),
+];
 
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({
@@ -35,7 +48,7 @@ const plugins = basePlugins
 module.exports = {
 
   entry: {
-    app: './src/index.ts',
+    app: appEntries,
     vendor: [
       'es6-shim',
       'angular2/bundles/angular2-polyfills',
@@ -83,7 +96,7 @@ module.exports = {
       { test: /\.woff2/, loader: 'url' },
       { test: /\.ttf/, loader: 'url' },
     ],
-    noParse: [ /zone\.js\/dist\/.+/, /angular2\/bundles\/.+/ ]
+    noParse: [/zone\.js\/dist\/.+/, /angular2\/bundles\/.+/]
   }
-    
+
 }
