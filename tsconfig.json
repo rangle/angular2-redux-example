@@ -6,7 +6,9 @@
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "compileOnSave": false,
+    "buildOnSave": false
   },
   "exclude": [
     "node_modules",
