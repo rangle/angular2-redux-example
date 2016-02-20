@@ -14,12 +14,13 @@
   "scripts": {
     "postinstall": "npm run typings && npm run build",
     "typings": "rimraf typings && typings install",
-    "dev": "NODE_ENV=development nodemon server.js",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development && npm run webpack-watch",
+    "start": "NODE_ENV=production && npm run webpack-watch",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack",
-    "test": "karma start"
+    "test": "karma start",
+    "webpack-watch": "webpack-dev-server ./src --hot --inline --module-bind"
   },
   "repository": {
     "type": "git",
@@ -76,6 +77,7 @@
     "typings": "^0.6.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.12",
+    "webpack-dev-server": "^1.14.1",
     "winston": "^2.1.1",
     "zone.js": "0.5.15"
   }
