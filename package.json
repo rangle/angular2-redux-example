@@ -96,7 +96,7 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "reflect-metadata": "0.1.2",
-    "remap-istanbul": "^0.5.1",
+    "remap-istanbul": "^0.6.0",
     "rimraf": "^2.5.1",
     "rxjs": "5.0.0-beta.2",
     "selenium-standalone": "^5.1.0",
