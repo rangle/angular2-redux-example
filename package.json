@@ -87,7 +87,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.4",
-    "ng2-redux": "^2.0.2",
+    "ng2-redux": "^2.2.2",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.8.1",
