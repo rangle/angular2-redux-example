@@ -90,7 +90,7 @@
     "ng2-redux": "^2.2.3",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
-    "postcss-loader": "^0.8.1",
+    "postcss-loader": "^0.9.0",
     "raf": "^3.2.0",
     "ramda": "^0.21.0",
     "raw-loader": "^0.5.1",
