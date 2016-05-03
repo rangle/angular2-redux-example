@@ -8,19 +8,19 @@ describe('isPromise', () => {
       promise,
     };
 
-    chai.expect(isPromise(payload)).to.be.true;
+    expect(isPromise(payload)).toBe(true);
   });
 
   it(`should return false if something that
       is not a Promise is provided`, () => {
-    const badPayload1 = { hello: 'world' };
-    const badPayload2 = ['hello', 'world'];
-    const badPayload3 = 'hello world';
-    const badPayload4 = 'hello world';
+      const badPayload1 = { hello: 'world' };
+      const badPayload2 = ['hello', 'world'];
+      const badPayload3 = 'hello world';
+      const badPayload4 = 'hello world';
 
-    chai.expect(isPromise({ promise: badPayload1 })).to.be.false;
-    chai.expect(isPromise({ promise: badPayload2 })).to.be.false;
-    chai.expect(isPromise({ promise: badPayload3 })).to.be.false;
-    chai.expect(isPromise({ promise: badPayload4 })).to.be.false;
-  });
+      expect(isPromise({ promise: badPayload1 })).toBe(false);
+      expect(isPromise({ promise: badPayload2 })).toBe(false);
+      expect(isPromise({ promise: badPayload3 })).toBe(false);
+      expect(isPromise({ promise: badPayload4 })).toBe(false);
+    });
 });

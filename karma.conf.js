@@ -5,9 +5,7 @@ const loaders = require('./webpack/loaders');
 module.exports = (config) => {
   config.set({
     frameworks: [
-      'mocha',
-      'chai',
-      'sinon',
+      'jasmine',
       'source-map-support',
     ],
 
@@ -25,7 +23,7 @@ module.exports = (config) => {
 
     webpack: {
       entry: './src/tests.entry.ts',
-      devtool: 'source-map',
+      devtool: 'inline-source-map',
       verbose: true,
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
@@ -46,11 +44,14 @@ module.exports = (config) => {
       noInfo: true, // prevent console spamming when running in Karma!
     },
 
-    reporters: ['mocha', 'coverage'],
-    // only output json report to be remapped by remap-istanbul
+    reporters: [
+      'spec',
+      'coverage',
+    ],
     coverageReporter: {
       reporters: [
         { type: 'json' },
+        { type: 'html' },
       ],
       dir: './coverage/',
       subdir: (browser) => {

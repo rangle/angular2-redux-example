@@ -82,7 +82,7 @@ module.exports = {
     chunkFilename: '[id].chunk.js',
   },
 
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],

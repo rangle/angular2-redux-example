@@ -9,7 +9,7 @@ let state = counterReducer();
 describe('counter reducer', () => {
   describe('inital state', () => {
     it('should be a Map', () => {
-      assert.strictEqual(Map.isMap(state), true);
+      expect(Map.isMap(state)).toBe(true);
     });
   });
 
@@ -17,7 +17,7 @@ describe('counter reducer', () => {
     it('should increment state.count', () => {
       const previousValue = state.get('count');
       state = fireAction(counterReducer, state, INCREMENT_COUNTER);
-      assert.strictEqual(state.get('count'), previousValue + 1);
+      expect(state.get('count')).toEqual(1);
     });
   });
 
@@ -25,7 +25,7 @@ describe('counter reducer', () => {
     it('should decrement state.count', () => {
       const previousValue = state.get('count');
       state = fireAction(counterReducer, state, DECREMENT_COUNTER);
-      assert.strictEqual(state.get('count'), previousValue - 1);
+      expect(state.get('count')).toEqual(previousValue - 1);
     });
   });
 });
