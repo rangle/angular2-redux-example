@@ -1,5 +1,5 @@
-import { Component, Input } from 'angular2/core';
-import { NgFormControl } from 'angular2/common';
+import { Component, Input } from '@angular/core';
+import { NgFormControl } from '@angular/common';
 
 @Component({
   selector: 'rio-input',

@@ -1,14 +1,11 @@
-import 'es5-shim';
-import 'es6-shim';
-import 'es6-promise';
-import '../shims/shims_for_IE';
+import 'core-js/es6';
+import 'core-js/es7/reflect';
+require('zone.js/dist/zone');
 
-import 'angular2/bundles/angular2-polyfills';
-
-import { enableProdMode, provide } from 'angular2/core';
-import { bootstrap } from 'angular2/platform/browser';
-import { ROUTER_PROVIDERS } from 'angular2/router';
-import { APP_BASE_HREF } from 'angular2/platform/common';
+import { enableProdMode, provide } from '@angular/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { APP_BASE_HREF } from '@angular/common/index';
 import { provider, NgRedux } from 'ng2-redux';
 
 import configureStore from './store/configure-store';
@@ -22,6 +19,8 @@ declare let __PRODUCTION__: any;
 
 if (__PRODUCTION__) {
   enableProdMode();
+} else {
+  require('zone.js/dist/long-stack-trace-zone');
 }
 
 bootstrap(RioSampleApp, [

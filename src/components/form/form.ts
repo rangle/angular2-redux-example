@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
-import { NgFormModel } from 'angular2/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NgFormModel } from '@angular/common';
 
 @Component({
   selector: 'rio-form',

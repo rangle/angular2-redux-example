@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from 'angular2/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FORM_DIRECTIVES,
   FormBuilder,
   ControlGroup,
   Control,
   Validators
-} from 'angular2/common';
+} from '@angular/common';
 
 import { RioForm, RioFormError, RioFormGroup, RioLabel } from '../form';
 import { RioAlert } from '../alert';
