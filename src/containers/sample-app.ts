@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation, ApplicationRef } from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
-import { AsyncPipe } from 'angular2/common';
+import { Component, ViewEncapsulation, ApplicationRef } from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { Map } from 'immutable';
 import { NgRedux } from 'ng2-redux';

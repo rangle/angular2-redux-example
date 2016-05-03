@@ -1,4 +1,4 @@
-import { Input, Component } from 'angular2/core';
+import { Input, Component } from '@angular/core';
 
 @Component({
   selector: 'rio-navigator-item',

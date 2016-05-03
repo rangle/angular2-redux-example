@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants';
 
 @Injectable()

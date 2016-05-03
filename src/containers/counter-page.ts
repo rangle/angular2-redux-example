@@ -1,6 +1,6 @@
-import { Component, Inject, ApplicationRef } from 'angular2/core';
+import { Component, Inject, ApplicationRef } from '@angular/core';
 import { bindActionCreators } from 'redux';
-import { AsyncPipe } from 'angular2/common';
+import { AsyncPipe } from '@angular/common';
 import { NgRedux } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 
