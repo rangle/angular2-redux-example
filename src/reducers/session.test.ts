@@ -16,15 +16,15 @@ let state = sessionReducer();
 describe('Session Reducer', () => {
   describe('inital state', () => {
     it('should be a Map', () => {
-      assert.strictEqual(Map.isMap(state), true);
+      expect(Map.isMap(state)).toBe(true);
     });
   });
 
   describe('on LOGIN_USER_PENDING', () => {
     it('should set loading to true', () => {
       state = fireAction(sessionReducer, state, LOGIN_USER_PENDING);
-      assert(state.get('isLoading'));
-      assert(state.get('token') === null);
+      expect(state.get('isLoading')).toBeTruthy;
+      expect(state.get('token')).toEqual(null);
     });
   });
 
@@ -36,9 +36,9 @@ describe('Session Reducer', () => {
         LOGIN_USER_SUCCESS,
         { token: 1234 });
 
-      assert(!state.get('isLoading'));
-      assert(!state.get('hasError'));
-      assert(state.get('token') === 1234);
+      expect(state.get('isLoading')).toBeFalsy;
+      expect(state.get('hasError')).toBeFalsy;
+      expect(state.get('token')).toEqual(1234);
     });
   });
 
@@ -46,8 +46,8 @@ describe('Session Reducer', () => {
     it('should save the username', () => {
       state = fireAction(sessionReducer, state, LOGIN_USER_ERROR);
 
-      assert(!state.get('isLoading'));
-      assert(state.get('hasError'));
+      expect(state.get('isLoading')).toBeFalsy;
+      expect(state.get('hasError')).toBeTruthy;
     });
   });
 
@@ -56,9 +56,9 @@ describe('Session Reducer', () => {
     it('should save the username', () => {
       state = fireAction(sessionReducer, state, LOGOUT_USER);
 
-      assert(!state.get('isLoading'));
-      assert(!state.get('hasError'));
-      assert(state.get('token') === null);
+      expect(state.get('isLoading')).toBeTruthy;
+      expect(state.get('hasError')).toBeFalsy;
+      expect(state.get('token')).toEqual(null);
     });
   });
 });
