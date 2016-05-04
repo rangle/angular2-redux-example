@@ -6,6 +6,7 @@ require('zone.js/dist/zone');
 import 'ts-helpers';
 
 import { enableProdMode, provide } from '@angular/core';
+import { HTTP_PROVIDERS } from '@angular/http';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { APP_BASE_HREF } from '@angular/common/index';
@@ -15,7 +16,8 @@ import configureStore from './store/configure-store';
 import { RioSampleApp } from './containers/sample-app';
 import { SessionActions } from './actions/session';
 import { CounterActions } from './actions/counter';
-import { LoginService } from './services/login';
+import { AUTH_PROVIDERS } from './services/auth/';
+import { SERVER_PROVIDERS } from './services/server/';
 
 const store = configureStore({});
 declare let __PRODUCTION__: any;
@@ -30,7 +32,9 @@ bootstrap(RioSampleApp, [
   provider(store),
   SessionActions,
   CounterActions,
-  LoginService,
+  AUTH_PROVIDERS,
+  SERVER_PROVIDERS,
+  HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
   provide(APP_BASE_HREF, { useValue: '/' })
 ]);

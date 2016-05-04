@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../services/login';
+import { AuthService } from '../services/auth/';
 
 import {
   LOGIN_USER_PENDING,
@@ -10,7 +10,7 @@ import {
 
 @Injectable()
 export class SessionActions {
-  constructor(private loginService: LoginService) {}
+  constructor(private authService: AuthService) {}
 
   loginUser(credentials) {
     return (dispatch, getState) => {
@@ -24,7 +24,7 @@ export class SessionActions {
           LOGIN_USER_ERROR,
         ],
         payload: {
-          promise: this.loginService.login(username, password)
+          promise: this.authService.login(username, password)
         },
       });
     };
@@ -35,4 +35,4 @@ export class SessionActions {
       type: LOGOUT_USER,
     };
   }
-} 
+}
