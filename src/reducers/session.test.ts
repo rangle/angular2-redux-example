@@ -29,7 +29,7 @@ describe('Session Reducer', () => {
   });
 
   describe('on LOGIN_USER_SUCCESS', () => {
-    it('should save the username', () => {
+    it('should save the user token', () => {
       state = fireAction(
         sessionReducer,
         state,
@@ -43,7 +43,7 @@ describe('Session Reducer', () => {
   });
 
   describe('on LOGIN_USER_ERROR', () => {
-    it('should save the username', () => {
+    it('should set loading to be false', () => {
       state = fireAction(sessionReducer, state, LOGIN_USER_ERROR);
 
       expect(state.get('isLoading')).toBeFalsy;
@@ -53,7 +53,7 @@ describe('Session Reducer', () => {
 
 
   describe('on LOGOUT_USER', () => {
-    it('should save the username', () => {
+    it('should wipe out the user token', () => {
       state = fireAction(sessionReducer, state, LOGOUT_USER);
 
       expect(state.get('isLoading')).toBeTruthy;
