@@ -16,7 +16,8 @@ import { RioInput } from '../form/input';
   selector: 'rio-login-form',
   directives: [
     FORM_DIRECTIVES, RioAlert, RioButton, RioInput,
-    RioForm, RioFormError, RioFormGroup, RioLabel
+    RioForm, RioFormError,
+    RioFormGroup, RioLabel
   ],
   template: `
     <rio-form

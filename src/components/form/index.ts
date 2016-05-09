@@ -4,4 +4,5 @@ import { RioFormGroup } from './form-group';
 import { RioLabel } from './label';
 import { RioInput } from './input';
 
-export { RioForm, RioFormError, RioFormGroup, RioLabel, RioInput };
+export { RioForm, RioFormError,
+RioFormGroup, RioLabel, RioInput };

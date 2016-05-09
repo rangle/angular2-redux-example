@@ -9,7 +9,7 @@ import { RioContainer, RioCounter } from '../components';
 import { IAppState } from '../store/app-state';
 
 @Component({
-  selector: 'counter-page',
+  selector: 'rio-counter-page',
   directives: [RioContainer, RioCounter],
   pipes: [AsyncPipe],
   template: `
