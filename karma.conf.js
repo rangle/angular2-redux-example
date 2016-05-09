@@ -34,6 +34,8 @@ module.exports = (config) => {
       module: {
         loaders: [
           loaders.tsTest,
+          loaders.css,
+          loaders.svg,
         ],
         postLoaders: [
           loaders.istanbulInstrumenter,
