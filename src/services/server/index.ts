@@ -20,6 +20,20 @@ export class ServerService {
      .map((res: Response) => res.json());
   }
 
+  public get(path) {
+    return this._http.get(this.BASE_URL + path)
+    .map((res: Response) => res.json());
+  }
+
+  public put(path, id, data) {
+    return this._http.put(this.BASE_URL + path + '/' + id, data)
+    .map((res: Response) => res.json());
+  }
+
+  public delete(path, id) {
+    return this._http.delete(this.BASE_URL + path + '/' + id);
+  }
+
 }
 
 export var SERVER_PROVIDERS: Array<any> = [
