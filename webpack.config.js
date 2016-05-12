@@ -94,9 +94,8 @@ module.exports = {
   plugins: plugins,
 
   devServer: {
-    port: 3000,
     historyApiFallback: { index: '/' },
-    proxy: Object.assign({}, proxy(), { '*': 'http://localhost:8080' }),
+    proxy: Object.assign({}, proxy(), { '*': 'http://localhost:3000' }),
   },
 
   module: {

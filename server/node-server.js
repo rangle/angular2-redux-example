@@ -2,7 +2,6 @@
 
 const express = require('express');
 const expressSession = require('express-session');
-const cors = require('cors');
 const winston = require('winston');
 const helmet = require('helmet');
 const nodeProxy = require('./node-proxy');
@@ -62,8 +61,7 @@ passport.deserializeUser( (id, done) => {
   done(null, authPassport.getUserById(id, users));
 });
 
-app.options('/api/auth/login', cors({ origin: 'http://localhost:3000' }));
-app.post('/api/auth/login', cors({ origin: 'http://localhost:3000' }),
+app.post('/api/auth/login',
   passport.authenticate('local'),
   (req, res) => {
     res.status(200).send(JSON.stringify(req.user));
