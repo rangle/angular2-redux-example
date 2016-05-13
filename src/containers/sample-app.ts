@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, ApplicationRef } from '@angular/core';
+import { Component, ViewEncapsulation, ApplicationRef, OnDestroy }
+from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
@@ -18,12 +19,13 @@ import {
   RioLoginModal
 } from '../components';
 
-
 @Component({
   selector: 'rio-sample-app',
   directives: [
-    ROUTER_DIRECTIVES, RioNavigator, RioNavigatorItem,
-    RioLoginModal, RioLogo, RioButton
+    ROUTER_DIRECTIVES, RioNavigator,
+    RioNavigatorItem,
+    RioLoginModal, RioLogo,
+    RioButton
   ],
   pipes: [ AsyncPipe ],
   // Allow app to define global styles.
@@ -44,7 +46,7 @@ import {
     component: RioAboutPage
   }
 ])
-export class RioSampleApp {
+export class RioSampleApp implements OnDestroy {
   private hasError$: Observable<boolean>;
   private isLoading$: Observable<boolean>;
   private loggedIn$: Observable<boolean>;
