@@ -7,7 +7,7 @@ exports.tslint = {
 };
 
 exports.tsTest = loadTs('ts', true);
-exports.istanbulInstrumenter = loadTs('istanbul-instrumenter');
+exports.istanbulInstrumenter = loadTs('istanbul-instrumenter?esModules');
 exports.ts = loadTs();
 
 function loadTs(loader, inTest) {

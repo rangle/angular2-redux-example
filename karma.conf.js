@@ -13,11 +13,10 @@ module.exports = (config) => {
     files: ['./src/tests.entry.ts'],
 
     preprocessors: {
-      './src/**/*.ts': [
+      './src/tests.entry.ts': [
         'webpack',
-        'sourcemap',
       ],
-      './src/**/!(*.test|tests.*).ts': [
+      './src/!(*.test|tests.*|*.d).ts': [
         'coverage',
       ],
     },
@@ -27,7 +26,6 @@ module.exports = (config) => {
       postcss: postcssInit,
       entry: './src/tests.entry.ts',
       devtool: 'inline-source-map',
-      verbose: true,
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
       },
@@ -56,12 +54,10 @@ module.exports = (config) => {
     coverageReporter: {
       reporters: [
         { type: 'json' },
-        { type: 'html' },
       ],
       dir: './coverage/',
-      subdir: (browser) => {
-        return browser.toLowerCase().split(/[ /-]/)[0]; // returns 'chrome'
-      },
+      subdir: () => 'report',
+      includeAllSources: true,
     },
 
     port: 9999,
