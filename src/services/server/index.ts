@@ -7,7 +7,7 @@ const HEADERS = new Headers({ 'Content-Type': 'application/json' });
 @Injectable()
 export class ServerService {
 
-  private BASE_URL = 'http://localhost:8080/api';
+  private BASE_URL = '/api';
 
   constructor(
     private _http: Http
