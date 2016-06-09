@@ -17,7 +17,7 @@ module.exports = {
   },
 
   devtool: process.env.NODE_ENV === 'production' ?
-    'source-map' :
+    undefined :
     'inline-source-map',
 
   resolve: { extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'] },
