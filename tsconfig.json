@@ -3,14 +3,19 @@
   "buildOnSave": false,
   "compilerOptions": {
     "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
+    "sourceMap": false,
     "inlineSourceMap": true,
     "noEmitHelpers": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": false,
+    "emitRequireType": false
   },
   "exclude": [
     "node_modules",

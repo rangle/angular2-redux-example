@@ -6,16 +6,21 @@ exports.tslint = {
   exclude: /node_modules/,
 };
 
-exports.tsTest = loadTs('ts', true);
+exports.tsTest = loadTs('awesome-typescript-loader', true);
 exports.istanbulInstrumenter = loadTs('istanbul-instrumenter');
 exports.ts = loadTs();
 
 function loadTs(loader, inTest) {
   return {
     test: /\.ts$/,
-    loader: loader || 'ts',
+    loader: loader || 'awesome-typescript-loader',
     exclude: inTest ? /node_modules/ :
       /(node_modules\/|\.test\.ts$|tests\.\w+\.ts$)/,
+    query: {
+      babelOptions: {
+        sourceMaps: inTest ? 'inline' : null,
+      },
+    },
   };
 }
 
