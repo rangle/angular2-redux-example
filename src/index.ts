@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'babel-polyfill';
 import 'core-js/es6';
 import 'core-js/es7/reflect';
 import '../shims/shims_for_IE';
