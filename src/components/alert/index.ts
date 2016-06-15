@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
     <div
       [id]="qaid"
       class="p2 bold"
+      [attr.data-testid]="testid"
       [ngClass]="{
         'bg-blue': status === 'info',
         'bg-yellow': status === 'warning',
@@ -20,4 +21,5 @@ import { Component, Input } from '@angular/core';
 export class RioAlert {
   @Input() status = 'info';
   @Input() qaid: string;
+  @Input() testid: string;
 };

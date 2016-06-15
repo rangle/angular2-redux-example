@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'rio-container',
   template: `
   <div
+    [attr.data-testid]="testid"
     class="clearFix px1"
     [ngClass]= "{
       'max-width-1': size === 1,
@@ -19,4 +20,5 @@ import { Component, Input } from '@angular/core';
 export class RioContainer {
   @Input() size = 1;
   @Input() center = false;
+  @Input() testid: string;
 };

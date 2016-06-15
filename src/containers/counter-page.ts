@@ -12,8 +12,8 @@ import { RioContainer, RioCounter } from '../components';
   directives: [ RioContainer, RioCounter ],
   pipes: [ AsyncPipe ],
   template: `
-    <rio-container [size]=2 [center]=true>
-      <h2 id="qa-counter-heading"
+    <rio-container testid="counter" [size]=2 [center]=true>
+      <h2 data-testid="counter-heading" id="qa-counter-heading"
         class="center caps">
         Counter
       </h2>

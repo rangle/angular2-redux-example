@@ -4,6 +4,7 @@ import { Input, Component } from '@angular/core';
   selector: 'rio-navigator-item',
   template: `
     <div
+      [attr.data-testid]="testid"
       class="truncate"
       [ngClass]="{
         mr2: mr,
@@ -16,4 +17,5 @@ import { Input, Component } from '@angular/core';
 export class RioNavigatorItem {
   @Input() mr = false;
   @Input() ml = false;
+  @Input() testid: string;
 };

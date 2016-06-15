@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'rio-form-group',
   template: `
-    <div class="py2">
+    <div
+        [attr.data-testid]="testid"
+        class="py2">
       <ng-content></ng-content>
     </div>
   `
 })
-export class RioFormGroup {};
+export class RioFormGroup {
+    @Input() testid: string;
+};

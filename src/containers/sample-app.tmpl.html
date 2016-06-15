@@ -6,7 +6,7 @@
     *ngIf="loggedOut$ | async">
   </rio-login-modal>
 
-  <rio-navigator>
+  <rio-navigator testid="navigator">
     <rio-navigator-item [mr]=true>
       <rio-logo></rio-logo>
     </rio-navigator-item>
@@ -23,7 +23,7 @@
 
     <div class="flex flex-auto"></div>
 
-    <rio-navigator-item *ngIf="loggedIn$ | async" [mr]=true>
+    <rio-navigator-item testid="user-profile" *ngIf="loggedIn$ | async" [mr]=true>
       {{ userName$ | async }}
     </rio-navigator-item>
 

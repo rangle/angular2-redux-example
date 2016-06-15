@@ -22,15 +22,20 @@ import { RioInput } from '../form/input';
     <rio-form
       [formModel]="group"
       (onSubmit)="handleSubmit()">
-      <rio-alert qaid="qa-pending" status='info'
+      <rio-alert 
+        qaid="qa-pending"
+        testid="alert-pending"
+        status='info'
         *ngIf="isPending">Loading...</rio-alert>
       <rio-alert
         qaid="qa-alert"
+        testid="alert-error"
         status='error'*ngIf="hasError">
         Invalid username and password
       </rio-alert>
 
-      <rio-form-group>
+      <rio-form-group
+        testid="login-username">
         <rio-label qaid="qa-uname-label">Username</rio-label>
         <rio-input
           qaid="qa-uname-input"
@@ -44,7 +49,8 @@ import { RioInput } from '../form/input';
         </rio-form-error>
       </rio-form-group>
 
-      <rio-form-group>
+      <rio-form-group
+        testid="login-password">
         <rio-label qaid="qa-password-label">Password</rio-label>
         <rio-input
           qaid="qa-password-input"
@@ -58,7 +64,8 @@ import { RioInput } from '../form/input';
         </rio-form-error>
       </rio-form-group>
 
-      <rio-form-group>
+      <rio-form-group
+        testid="login-submit">
         <rio-button
           qaid="qa-login-button"
           className="mr1"
@@ -68,6 +75,7 @@ import { RioInput } from '../form/input';
         <rio-button
           qaid="qa-clear-button"
           className="bg-red"
+          type="reset"
           (onClick)="reset()">
           Clear
         </rio-button>
