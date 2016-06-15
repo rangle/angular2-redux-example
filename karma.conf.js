@@ -92,6 +92,11 @@ function combinedLoaders() {
     switch (k) {
     case 'tslint': // intolerably slow
       return aggregate;
+    case 'ts':
+    case 'tsTest':
+      return aggregate.concat([ // force inline source maps
+        Object.assign(loaders[k],
+          { query: { babelOptions: { sourceMaps: 'inline' } } })]);
     default:
       return aggregate.concat([loaders[k]]);
     }

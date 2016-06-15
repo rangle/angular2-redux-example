@@ -25,7 +25,7 @@ setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
 const environment: any = window || this;
-Object.assign(environment, { // various third-party libraries depend on these
+Object.assign(environment, {
   __DEV__: true,
   __PRODUCTION__: false,
   __TEST__: true
