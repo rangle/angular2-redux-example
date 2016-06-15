@@ -24,9 +24,6 @@ import {
 setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
-const environment: any = window || this;
-Object.assign(environment, { __TEST__: true });
-
 import './index.ts';
 
 const testContext = (<{ context?: Function }>require)
