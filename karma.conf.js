@@ -2,6 +2,7 @@
 
 const loaders = require('./webpack/loaders');
 const postcssInit = require('./webpack/postcss');
+const plugins = require('./webpack/plugins');
 
 module.exports = (config) => {
   config.set({
@@ -41,7 +42,7 @@ module.exports = (config) => {
     },
 
     webpack: {
-      plugins: [],
+      plugins: plugins,
       postcss: postcssInit,
       entry: './src/tests.entry.ts',
       devtool: 'inline-source-map',
