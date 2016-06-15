@@ -19,7 +19,8 @@ import { CounterActions } from './actions/counter';
 import { AuthService } from './services/auth/';
 import { ServerService } from './services/server/';
 
-declare let __PRODUCTION__: any;
+declare const __PRODUCTION__: boolean;
+declare const __TEST__: boolean;
 
 if (__PRODUCTION__) {
   enableProdMode();
@@ -27,13 +28,15 @@ if (__PRODUCTION__) {
   require('zone.js/dist/long-stack-trace-zone');
 }
 
-bootstrap(RioSampleApp, [
-  NgRedux,
-  SessionActions,
-  CounterActions,
-  AuthService,
-  ServerService,
-  HTTP_PROVIDERS,
-  ROUTER_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '/' })
-]);
+if (!__TEST__) {
+  bootstrap(RioSampleApp, [
+    NgRedux,
+    SessionActions,
+    CounterActions,
+    AuthService,
+    ServerService,
+    HTTP_PROVIDERS,
+    ROUTER_PROVIDERS,
+    provide(APP_BASE_HREF, { useValue: '/' })
+  ]);
+}

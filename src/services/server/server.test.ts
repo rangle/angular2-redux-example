@@ -23,7 +23,6 @@ import {
 
 import {provide} from '@angular/core';
 import {ServerService} from './index';
-import isPromise from '../../utils/is-promise';
 
 describe('Testing server service', () => {
   const _mockPath = '/path';

@@ -24,8 +24,16 @@ import {
 setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
-let testContext = (<{ context?: Function }>require).context(
-  './',
-  true,
-  /\.test\.ts/);
+const environment: any = window || this;
+Object.assign(environment, { // various third-party libraries depend on these
+  __DEV__: true,
+  __PRODUCTION__: false,
+  __TEST__: true
+});
+
+import './index.ts';
+
+const testContext = (<{ context?: Function }>require)
+  .context('./', true, /\.test\.ts$/);
+
 testContext.keys().forEach(testContext);

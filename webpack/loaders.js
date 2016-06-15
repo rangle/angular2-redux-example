@@ -16,11 +16,6 @@ function loadTs(loader, inTest) {
     loader: loader || 'awesome-typescript-loader',
     exclude: inTest ? /node_modules/ :
       /(node_modules\/|\.test\.ts$|tests\.\w+\.ts$)/,
-    query: {
-      babelOptions: {
-        sourceMaps: inTest ? 'inline' : null,
-      },
-    },
   };
 }
 
