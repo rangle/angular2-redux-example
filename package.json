@@ -46,7 +46,6 @@
     "winston": "^2.1.1"
   },
   "devDependencies": {
-    "typings": "^1.0.4",
     "@angular/common": "2.0.0-rc.1",
     "@angular/compiler": "2.0.0-rc.1",
     "@angular/core": "2.0.0-rc.1",
@@ -58,6 +57,7 @@
     "autoprefixer-core": "^6.0.1",
     "awesome-typescript-loader": "^1.0.0",
     "babel-core": "^6.9.1",
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "basscss": "^8.0.1",
     "basscss-addons": "^1.0.0-beta4",
@@ -128,6 +128,7 @@
     "tslint": "^3.3.0",
     "tslint-loader": "^2.1.0",
     "typescript": "^1.8.10",
+    "typings": "^1.0.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
