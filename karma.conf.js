@@ -32,6 +32,7 @@ module.exports = (config) => {
     preprocessors: {
       './src/**/*.ts': [
         'webpack',
+        'sourcemap',
       ],
       './src/**/!(*.test|tests.*).ts': [
         'coverage',
