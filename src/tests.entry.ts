@@ -25,11 +25,7 @@ setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
 const environment: any = window || this;
-Object.assign(environment, {
-  __DEV__: true,
-  __PRODUCTION__: false,
-  __TEST__: true
-});
+Object.assign(environment, { __TEST__: true });
 
 import './index.ts';
 
