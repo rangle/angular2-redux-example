@@ -31,7 +31,6 @@ if (!__TEST__) {
   bootstrap(RioSampleApp, [
     NgRedux,
     SessionActions,
-    CounterActions,
     AuthService,
     ServerService,
     HTTP_PROVIDERS,
