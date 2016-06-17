@@ -6,18 +6,16 @@ exports.tslint = {
   exclude: /node_modules/,
 };
 
-exports.tsTest = loadTs('awesome-typescript-loader', true);
-exports.istanbulInstrumenter = loadTs('istanbul-instrumenter');
-exports.ts = loadTs();
+exports.ts = {
+  test: /\.ts$/,
+  loader: 'awesome-typescript-loader',
+  exclude: /node_modules/,
+};
 
-function loadTs(loader, inTest) {
-  return {
-    test: /\.ts$/,
-    loader: loader || 'awesome-typescript-loader',
-    exclude: inTest ? /node_modules/ :
-      /(node_modules\/|\.test\.ts$|tests\.\w+\.ts$)/,
-  };
-}
+exports.istanbulInstrumenter = {
+  test: /\.ts$/,
+  loader: 'istanbul-instrumenter-loader',
+};
 
 exports.html = {
   test: /\.html$/,
