@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 
+const sourceMap = process.env.TEST
+  ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.ts$/ })]
+  : [ ];
+
 const basePlugins = [
   new webpack.DefinePlugin({
     __DEV__: process.env.NODE_ENV !== 'production',
@@ -21,7 +25,7 @@ const basePlugins = [
     minify: false,
   }),
   new webpack.NoErrorsPlugin(),
-];
+].concat(sourceMap);
 
 const devPlugins = [
   new StyleLintPlugin({
