@@ -19,15 +19,15 @@ import { RioContainer, RioCounter } from '../components';
       </h2>
 
       <rio-counter
-        [counter]="counter$ | async"
-        [increment]="actions.increment.bind(actions)"
-        [decrement]="actions.decrement.bind(actions)">
+        [counter$]="counter$"
+        (increment)="actions.increment()"
+        (decrement)="actions.decrement()">
       </rio-counter>
     </rio-container>
   `
 })
 export class RioCounterPage {
-  constructor(private actions: CounterActions) {}
-
   @select(n => n.counter.get('count')) private counter$: Observable<number>;
+
+  constructor(private actions: CounterActions) {}
 }
