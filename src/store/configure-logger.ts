@@ -1,6 +1,8 @@
 import { Iterable } from 'immutable';
 const createLogger = require('redux-logger');
 
+declare const __DEV__: boolean; // from webpack
+
 const logger = createLogger({
     level: 'info',
     collapsed: true,

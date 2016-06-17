@@ -24,9 +24,14 @@ import {
 setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
-import './index.ts';
-
 const testContext = (<{ context?: Function }>require)
-  .context('./', true, /\.test\.ts$/);
+  .context('./', true, /^(.(?!tests\.entry))*\.ts$/);
 
-testContext.keys().forEach(testContext);
+testContext('./index.ts');
+
+testContext.keys().forEach(
+  key => {
+    if (/\.test\.ts$/.test(key)) {
+      testContext(key);
+    }
+  });
