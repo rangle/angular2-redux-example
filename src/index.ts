@@ -15,7 +15,6 @@ import { NgRedux } from 'ng2-redux';
 
 import { RioSampleApp } from './containers/sample-app';
 import { SessionActions } from './actions/session';
-import { CounterActions } from './actions/counter';
 import { AuthService } from './services/auth/';
 import { ServerService } from './services/server/';
 
