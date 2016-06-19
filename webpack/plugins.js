@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const sourceMap = process.env.TEST
   ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.ts$/ })]
@@ -25,6 +26,9 @@ const basePlugins = [
     minify: false,
   }),
   new webpack.NoErrorsPlugin(),
+  new CopyWebpackPlugin([
+    { from: 'src/assets', to: 'assets' },
+  ]),
 ].concat(sourceMap);
 
 const devPlugins = [
