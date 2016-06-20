@@ -84,7 +84,7 @@
     "denodeify": "^1.2.1",
     "eslint": "^2.9.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.7.2",
     "html5-history-api": "^4.2.7",
     "immutable": "^3.7.6",
