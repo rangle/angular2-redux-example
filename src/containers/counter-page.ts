@@ -1,10 +1,11 @@
 import { Component, Inject, ApplicationRef } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { bindActionCreators } from 'redux';
-import { select } from 'ng2-redux';
+import { select, NgRedux } from 'ng2-redux';
 import { CounterActions } from '../actions/counter';
 import { Observable } from 'rxjs/Observable';
 import { RioContainer, RioCounter } from '../components';
+import { IAppState } from '../reducers';
 
 @Component({
   selector: 'counter-page',
@@ -29,5 +30,10 @@ import { RioContainer, RioCounter } from '../components';
 export class RioCounterPage {
   @select(n => n.counter.get('count')) private counter$: Observable<number>;
 
-  constructor(private actions: CounterActions) {}
+  constructor(private actions: CounterActions,
+    private ngRedux: NgRedux<IAppState>) { }
+  
+  increment() {
+    this.ngRedux.dispatch({ type: CounterActions.INCREMENT_COUNTER });
+  }
 }
