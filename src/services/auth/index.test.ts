@@ -25,7 +25,7 @@ describe('Testing authentication service', () => {
     name: 'testuser',
   };
 
-  beforeEachProviders(() => {
+  beforeEach(() => {
     _mockServerService = {
       post: (path, data) => {
         return new Observable(observer => {

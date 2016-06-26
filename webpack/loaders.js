@@ -29,16 +29,16 @@ exports.css = {
   exclude: /node_modules/,
 };
 
-exports.svg = makeUrlLoader(/\.svg$/);
-exports.eot = makeUrlLoader(/\.eot$/);
-exports.woff = makeUrlLoader(/\.woff$/);
-exports.woff2 = makeUrlLoader(/\.woff2$/);
-exports.ttf = makeUrlLoader(/\.ttf$/);
+exports.svg = makeFileLoader(/\.svg$/);
+exports.eot = makeFileLoader(/\.eot$/);
+exports.woff = makeFileLoader(/\.woff$/);
+exports.woff2 = makeFileLoader(/\.woff2$/);
+exports.ttf = makeFileLoader(/\.ttf$/);
 
-function makeUrlLoader(pattern) {
+function makeFileLoader(pattern) {
   return {
     test: pattern,
-    loader: 'url',
+    loader: 'file',
     exclude: /node_modules/,
   };
 }
