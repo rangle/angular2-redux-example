@@ -39,6 +39,7 @@
     "url": "https://github.com/rangle/angular2-redux-starter/issues"
   },
   "dependencies": {
+    "@angular/router": "^3.0.0-alpha.8",
     "express": "^4.13.4",
     "helmet": "^2.0.0",
     "http-proxy": "^1.13.2",

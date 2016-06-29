@@ -1,15 +1,12 @@
 import { Component, ViewEncapsulation, ApplicationRef } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Map } from 'immutable';
 import { NgRedux, select } from 'ng2-redux';
 
 import { IAppState } from '../reducers';
 import { ISession } from '../reducers/session';
 import { SessionActions } from '../actions/session';
-import { RioAboutPage } from './about-page';
-import { RioCounterPage } from './counter-page';
 import rootReducer from '../reducers';
 import { middleware, enhancers } from '../store';
 
@@ -33,19 +30,6 @@ import {
   styles: [ require('../styles/index.css') ],
   template: require('./sample-app.tmpl.html')
 })
-@RouteConfig([
-  {
-    path: '/counter',
-    name: 'Counter',
-    component: RioCounterPage,
-    useAsDefault: true
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: RioAboutPage
-  }
-])
 export class RioSampleApp {
   @select() session$: Observable<ISession>;
 

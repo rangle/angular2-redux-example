@@ -12,12 +12,12 @@
     </rio-navigator-item>
 
     <rio-navigator-item *ngIf="loggedIn$ | async" [mr]=true>
-      <a [routerLink]="['Counter']"
+      <a [routerLink]="['/']"
         class="text-decoration-none">Counter</a>
     </rio-navigator-item>
 
     <rio-navigator-item *ngIf="loggedIn$ | async">
-      <a [routerLink]="['About']"
+      <a [routerLink]="['/about']"
         class="text-decoration-none">About Us</a>
     </rio-navigator-item>
 
@@ -34,6 +34,6 @@
     </rio-navigator-item>
   </rio-navigator>
   <main>
-    <router-outlet *ngIf="loggedIn$ | async"></router-outlet>
+    <router-outlet></router-outlet>
   </main>
 </div>
