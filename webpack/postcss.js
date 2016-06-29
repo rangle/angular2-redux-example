@@ -6,9 +6,7 @@ const postcssBasePlugins = [
   require('postcss-import')({
     addDependencyTo: webpack,
   }),
-  require('postcss-cssnext')({
-    browsers: ['ie >= 8', 'last 2 versions'],
-  }),
+  require('postcss-cssnext'),
 ];
 const postcssDevPlugins = [];
 const postcssProdPlugins = [

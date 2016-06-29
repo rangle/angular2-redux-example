@@ -25,7 +25,7 @@ exports.html = {
 
 exports.css = {
   test: /\.css$/,
-  loader: 'to-string!css!postcss',
+  loader: 'to-string!css?-minimize!postcss',
   exclude: /node_modules/,
 };
 
