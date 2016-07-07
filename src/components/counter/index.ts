@@ -13,8 +13,9 @@ import { RioButton } from '../button';
     <div class="flex">
       <rio-button
         className="bg-black col-2"
-        (onClick)="decrement.emit()">
-        testid="counter-decrementButton"
+        (onClick)="decrement.emit()"
+        testid="counter-decrementButton">
+        -
       </rio-button>
 
       <div 
@@ -24,8 +25,9 @@ import { RioButton } from '../button';
       </div>
 
       <rio-button className="col-2"
-        (onClick)="increment.emit()">
-        testid="counter-incrementButton"
+        (onClick)="increment.emit()"
+        testid="counter-incrementButton">
+        +
       </rio-button>
     </div>
   `,
