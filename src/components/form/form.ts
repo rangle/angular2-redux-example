@@ -1,16 +1,17 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgFormModel } from '@angular/common';
+import { REACTIVE_FORM_DIRECTIVES, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'rio-form',
+  directives: [REACTIVE_FORM_DIRECTIVES],
   template: `
-    <form [ngFormModel]="formModel"
+    <form [formGroup]="group"
       (ngSubmit)="onSubmit.emit($event)">
       <ng-content></ng-content>
     </form>
   `
 })
 export class RioForm {
-  @Input() formModel: NgFormModel;
+  @Input() group: FormGroup;
   @Output() onSubmit = new EventEmitter<Event>();
 };

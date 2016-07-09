@@ -1,26 +1,22 @@
 import {
-  async,
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
   inject,
-  injectAsync,
 } from '@angular/core/testing';
 import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioModalContent } from './modal-content';
-import { NgFormModel, ControlGroup, Control, FormBuilder }
-from '@angular/common';
-
 
 describe('Component: Modal Content', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [RioModalContent]);
+  beforeEach(() => addProviders([RioModalContent]));
+
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;
@@ -31,7 +27,7 @@ describe('Component: Modal Content', () => {
       expect(component).toBeTruthy();
     }));
 
-  it('should create the component', injectAsync([], () => {
+  it('should create the component', inject([], () => {
     return builder.createAsync(RioModalContentTestController)
       .then((fixture: ComponentFixture<any>) => {
         fixture.autoDetectChanges();

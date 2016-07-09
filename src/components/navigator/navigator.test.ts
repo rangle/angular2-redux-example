@@ -1,26 +1,23 @@
 import {
   async,
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
   inject,
-  injectAsync,
 } from '@angular/core/testing';
 import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioNavigator } from './navigator';
-import { NgFormModel, ControlGroup, Control, FormBuilder }
-from '@angular/common';
-
 
 describe('Component: Navigator', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [RioNavigator]);
+  beforeEach(() => addProviders([RioNavigator]));
+  
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;
