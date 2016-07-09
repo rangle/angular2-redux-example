@@ -48,7 +48,7 @@ import { RioInput } from '../form/input';
           Username is required.
         </rio-form-error>
       </rio-form-group>
-FormGroup
+
       <rio-form-group
         testid="login-password">
         <rio-label qaid="qa-password-label">Password</rio-label>
