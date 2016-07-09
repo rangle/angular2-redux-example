@@ -18,9 +18,6 @@ const basePlugins = [
     __TEST__: JSON.stringify(process.env.TEST || false),
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }),
-  new SplitByPathPlugin([
-    { name: 'vendor', path: [__dirname + '/node_modules/'] },
-  ]),
   new HtmlWebpackPlugin({
     template: './src/index.html',
     inject: 'body',
