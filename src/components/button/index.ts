@@ -19,7 +19,7 @@ export class RioButton {
   @Input() type: string;
   @Input() qaid: string;
   @Input() testid: string;
-  @Output() onClick = new EventEmitter<Event>();
+  @Output() onClick = new EventEmitter<any>();
 
   handleClick(event) {
     this.onClick.emit(event);

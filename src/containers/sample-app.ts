@@ -28,7 +28,7 @@ import {
   // Allow app to define global styles.
   encapsulation: ViewEncapsulation.None,
   styles: [ require('../styles/index.css') ],
-  template: require('./sample-app.tmpl.html')
+  template: require('./sample-app.html')
 })
 export class RioSampleApp {
   @select() session$: Observable<ISession>;
