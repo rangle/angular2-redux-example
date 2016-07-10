@@ -1,27 +1,24 @@
 import {
   async,
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
   inject,
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { RioInput } from './input';
-import { NgFormModel, ControlGroup, Control, FormBuilder }
-from '@angular/common';
+import { provideForms, FormControl } from '@angular/forms';
 
 describe('Component: Form Input', () => {
-  
+  beforeEach(() => addProviders([provideForms()]));
+
   it('should render the input with the correct property values',
     async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb.createAsync(RioInput)
         .then((fixture: ComponentFixture<any>) => {
-          fixture.componentInstance.formControl = new Control('');
+          fixture.componentInstance.control = new FormControl('');
           fixture.componentInstance.qaid = 'input-1';
           fixture.componentInstance.placeholder = 'test placeholder';
           fixture.detectChanges();

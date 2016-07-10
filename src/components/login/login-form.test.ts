@@ -1,21 +1,21 @@
 import {
   async,
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
   inject,
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-  from '@angular/compiler/testing';
-import { Component } from '@angular/core';
+import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { RioLoginForm } from './index';
+import { provideForms } from '@angular/forms';
 
 describe('Component: Login Form', () => {
   let builder: TestComponentBuilder;
-
-  beforeEachProviders(() => [RioLoginForm]);
+  
+  beforeEach(() => addProviders([provideForms(), RioLoginForm]));
+  
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;

@@ -1,22 +1,22 @@
 import { Component, Input } from '@angular/core';
-import { NgFormControl } from '@angular/common';
+import { REACTIVE_FORM_DIRECTIVES, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'rio-input',
-  directives: [ NgFormControl ],
+  directives: [REACTIVE_FORM_DIRECTIVES],
   template: `
     <input
       [id]="qaid"
       [type]="inputType"
       class="block col-12 mb1 input"
       [attr.placeholder]="placeholder"
-      [ngFormControl]="formControl"
+      [formControl]="control"
     />
   `
 })
 export class RioInput {
   @Input() inputType = 'text';
   @Input() placeholder = '';
-  @Input() formControl: NgFormControl;
+  @Input() control: FormControl;
   @Input() qaid: string;
 };

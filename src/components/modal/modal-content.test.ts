@@ -1,6 +1,6 @@
 import {
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
@@ -11,14 +11,12 @@ from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioModalContent } from './modal-content';
-import { NgFormModel, ControlGroup, Control, FormBuilder }
-from '@angular/common';
-
 
 describe('Component: Modal Content', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [RioModalContent]);
+  beforeEach(() => addProviders([RioModalContent]));
+
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;
