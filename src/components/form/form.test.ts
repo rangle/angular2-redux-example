@@ -1,7 +1,7 @@
 import {
   async,
   beforeEach,
-  beforeEachProviders,
+  addProviders,
   describe,
   expect,
   it,
@@ -12,13 +12,24 @@ from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioForm } from './form';
-import { NgFormModel, ControlGroup, Control, FormBuilder }
-from '@angular/common';
+import {
+  REACTIVE_FORM_DIRECTIVES,
+  disableDeprecatedForms,
+  provideForms,
+  FormGroup,
+  FormControl,
+  FormBuilder
+} from '@angular/forms';
 
 describe('Component: Form', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [RioForm]);
+  beforeEach(() => addProviders([
+    disableDeprecatedForms(),
+    provideForms(),
+    RioForm
+  ]));
+
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;
@@ -38,7 +49,7 @@ describe('Component: Form', () => {
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
         expect(query.componentInstance.onSubmit).toBeTruthy();
-        expect(query.componentInstance.formModel).toBeTruthy();
+        expect(query.componentInstance.group).toBeTruthy();
       });
   })));
 
@@ -61,19 +72,19 @@ describe('Component: Form', () => {
   selector: 'test',
   template: `
     <rio-form
-      [formModel]="group">
+      [group]="group">
       <input
-        [ngFormControl]="field1">
+        [formControl]="field1">
       <button type="submit">submit</button>
       </rio-form>
   `,
-  directives: [RioForm]
+  directives: [REACTIVE_FORM_DIRECTIVES, RioForm],
 })
 class RioFormTestController {
-  private group: ControlGroup;
-  private field1: Control;
+  private group: FormGroup;
+  private field1: FormControl;
   constructor(private builder: FormBuilder) {
-    this.field1 = new Control('test value');
+    this.field1 = new FormControl('test value');
     this.group = this.builder.group({
       field1: this.field1,
     });

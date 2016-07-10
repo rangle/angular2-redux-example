@@ -14,6 +14,8 @@ import { NgRedux } from 'ng2-redux';
 import { provideRouter } from '@angular/router';
 import { SAMPLE_APP_ROUTES } from './routes/sample-app';
 
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
+
 import { RioSampleApp } from './containers/sample-app';
 import { SessionActions } from './actions/session';
 import { AuthService } from './services/auth/';
@@ -35,6 +37,8 @@ if (!__TEST__) {
     AuthService,
     ServerService,
     HTTP_PROVIDERS,
-    provideRouter(SAMPLE_APP_ROUTES)
+    provideRouter(SAMPLE_APP_ROUTES),
+    disableDeprecatedForms(),
+    provideForms()
   ]);
 }

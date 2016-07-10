@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import {
-  FORM_DIRECTIVES,
   FormBuilder,
-  ControlGroup,
-  Control,
+  FormGroup,
+  FormControl,
   Validators
-} from '@angular/common';
+} from '@angular/forms';
 
 import { RioForm, RioFormError, RioFormGroup, RioLabel } from '../form';
 import { RioAlert } from '../alert';
@@ -15,12 +15,12 @@ import { RioInput } from '../form/input';
 @Component({
   selector: 'rio-login-form',
   directives: [
-    FORM_DIRECTIVES, RioAlert, RioButton, RioInput,
+    RioAlert, RioButton, RioInput,
     RioForm, RioFormError, RioFormGroup, RioLabel
   ],
   template: `
     <rio-form
-      [formModel]="group"
+      [group]="group"
       (onSubmit)="handleSubmit()">
       <rio-alert 
         qaid="qa-pending"
@@ -41,7 +41,7 @@ import { RioInput } from '../form/input';
           qaid="qa-uname-input"
           inputType='text'
           placeholder='Username'
-          [formControl]="username"></rio-input>
+          [control]="username"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
           [visible]="showNameWarning()">
@@ -56,7 +56,7 @@ import { RioInput } from '../form/input';
           qaid="qa-password-input"
           inputType='password'
           placeholder='Password'
-          [formControl]="password"></rio-input>
+          [control]="password"></rio-input>
         <rio-form-error
           qaid="qa-password-validation"
           [visible]="showPasswordWarning()">
@@ -87,9 +87,9 @@ export class RioLoginForm {
   @Input() isPending: boolean;
   @Input() hasError: boolean;
   @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
-  private username: Control;
-  private password: Control;
-  private group: ControlGroup;
+  private username: FormControl;
+  private password: FormControl;
+  private group: FormGroup;
 
   constructor(private builder: FormBuilder) {
     this.reset();
@@ -117,8 +117,8 @@ export class RioLoginForm {
   }
 
   reset() {
-    this.username = new Control('', Validators.required);
-    this.password = new Control('', Validators.required);
+    this.username = new FormControl('', Validators.required);
+    this.password = new FormControl('', Validators.required);
     this.hasError = false;
     this.isPending = false;
     this.group = this.builder.group({
