@@ -6,7 +6,6 @@ import {
   expect,
   it,
   inject,
-  injectAsync,
 } from '@angular/core/testing';
 import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';

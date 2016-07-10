@@ -1,12 +1,10 @@
 import {
-  async,
   beforeEach,
   beforeEachProviders,
   describe,
   expect,
   it,
   inject,
-  injectAsync,
 } from '@angular/core/testing';
 import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
@@ -31,7 +29,7 @@ describe('Component: Modal Content', () => {
       expect(component).toBeTruthy();
     }));
 
-  it('should create the component', injectAsync([], () => {
+  it('should create the component', inject([], () => {
     return builder.createAsync(RioModalContentTestController)
       .then((fixture: ComponentFixture<any>) => {
         fixture.autoDetectChanges();
