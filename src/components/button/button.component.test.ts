@@ -11,7 +11,7 @@ import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { RioButton } from './index';
+import { RioButton } from './button.component';
 
 describe('Component: Button', () => {
   let builder: TestComponentBuilder;

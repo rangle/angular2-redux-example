@@ -10,7 +10,7 @@ import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { RioModalContent } from './modal-content';
+import { RioModalContent } from './modal-content.component';
 
 describe('Component: Modal Content', () => {
   let builder: TestComponentBuilder;

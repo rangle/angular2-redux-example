@@ -1,4 +1,4 @@
-import { RioModal } from './modal';
-import { RioModalContent } from './modal-content';
+import { RioModal } from './modal.component';
+import { RioModalContent } from './modal-content.component';
 
 export { RioModal, RioModalContent };

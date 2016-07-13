@@ -11,7 +11,7 @@ import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { RioAlert } from './index';
+import { RioAlert } from './alert.component';
 
 describe('Component: Alert', () => {
   let builder: TestComponentBuilder;

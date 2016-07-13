@@ -11,29 +11,29 @@ import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { RioNavigator } from './navigator';
+import { RioModal } from './modal.component';
 
-describe('Component: Navigator', () => {
+describe('Component: Modal', () => {
   let builder: TestComponentBuilder;
 
-  beforeEach(() => addProviders([RioNavigator]));
-  
+  beforeEach(() => addProviders([RioModal]));
+
   beforeEach(inject([TestComponentBuilder],
     function (tcb: TestComponentBuilder) {
       builder = tcb;
     }));
 
-  it('should inject the component', inject([RioNavigator],
-    (component: RioNavigator) => {
+  it('should inject the component', inject([RioModal],
+    (component: RioModal) => {
       expect(component).toBeTruthy();
     }));
 
   it('should create the component', async(inject([], () => {
-    return builder.createAsync(RioNavigatorTestController)
+    return builder.createAsync(RioModalTestController)
       .then((fixture: ComponentFixture<any>) => {
         fixture.autoDetectChanges();
         let query = fixture.debugElement
-          .query(By.directive(RioNavigator));
+          .query(By.directive(RioModal));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -43,9 +43,9 @@ describe('Component: Navigator', () => {
 @Component({
   selector: 'test',
   template: `
-    <rio-navigator></rio-navigator>
+    <rio-modal></rio-modal>
   `,
-  directives: [RioNavigator]
+  directives: [RioModal]
 })
-class RioNavigatorTestController { }
+class RioModalTestController {}
 

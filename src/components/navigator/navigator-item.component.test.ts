@@ -11,7 +11,7 @@ import { ComponentFixture, TestComponentBuilder }
 from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { RioNavigatorItem } from './navigator-item';
+import { RioNavigatorItem } from './navigator-item.component';
 import { NgFormModel, ControlGroup, Control, FormBuilder }
 from '@angular/common';
 
