@@ -24,7 +24,7 @@
     <div class="flex flex-auto"></div>
 
     <rio-navigator-item testid="user-profile" *ngIf="loggedIn$ | async" [mr]=true>
-      {{ userName$ | async }}
+      {{ firstName$ | async }} {{ lastName$ | async }}
     </rio-navigator-item>
 
     <rio-navigator-item [hidden]="loggedOut$ | async">

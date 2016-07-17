@@ -1,10 +1,10 @@
 import { Component, Inject, ApplicationRef } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { bindActionCreators } from 'redux';
-import { select } from 'ng2-redux';
-import { CounterActions } from '../actions/counter';
 import { Observable } from 'rxjs/Observable';
+import { select } from 'ng2-redux';
+import { CounterActions } from '../actions';
 import { RioContainer, RioCounter } from '../components';
+import { ICounter } from '../store';
 
 @Component({
   selector: 'counter-page',
@@ -27,7 +27,6 @@ import { RioContainer, RioCounter } from '../components';
   `
 })
 export class RioCounterPage {
-  @select(s => s.counter.get('count')) private counter$: Observable<number>;
-
+  @select() private counter$: Observable<ICounter>;
   constructor(private actions: CounterActions) {}
 }

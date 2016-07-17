@@ -1,16 +1,14 @@
-import * as assert from 'assert';
-import fireAction from '../utils/fire-action';
-import { sessionReducer } from '../reducers/session';
-import { SessionActions } from '../actions/session';
+import { Iterable } from 'immutable';
+import fireAction from '../../utils/fire-action';
+import { sessionReducer } from './session.reducer';
+import { SessionActions } from '../../actions/session.actions';
 
-import { Map } from 'immutable';
-
-let state = sessionReducer();
+let state = sessionReducer(undefined, { type: 'TEST_INIT'});
 
 describe('Session Reducer', () => {
   describe('inital state', () => {
-    it('should be a Map', () => {
-      expect(Map.isMap(state)).toBe(true);
+    it('should be immutable', () => {
+      expect(Iterable.isIterable(state)).toBe(true);
     });
   });
 
@@ -19,7 +17,7 @@ describe('Session Reducer', () => {
       state = fireAction(
         sessionReducer,
         state,
-        SessionActions.LOGIN_USER_PENDING);
+        SessionActions.LOGIN_USER);
       expect(state.get('isLoading')).toBeTruthy;
       expect(state.get('token')).toEqual(null);
     });

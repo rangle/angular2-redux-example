@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { ICounter } from '../../store';
 import { RioButton } from '../button';
 
 @Component({
@@ -21,7 +22,7 @@ import { RioButton } from '../button';
       <div 
         data-testid="counter-result"
         class="flex-auto flex-center center h1">
-        {{ counter }}
+        {{ counter.counter }}
       </div>
 
       <rio-button className="col-2"
@@ -35,7 +36,7 @@ import { RioButton } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RioCounter {
-  @Input() counter: number;
+  @Input() counter: ICounter;
   @Output() increment = new EventEmitter<void>();
   @Output() decrement = new EventEmitter<void>();
 };

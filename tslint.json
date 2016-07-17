@@ -11,7 +11,7 @@
     "max-line-length": [true, 80],
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": [true,
+    "no-console": [1,
       "log",
       "debug",
       "info",

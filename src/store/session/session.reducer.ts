@@ -1,24 +1,17 @@
-import { SessionActions } from '../actions/session';
-import { Map, fromJS } from 'immutable';
-
-const INITIAL_STATE = fromJS({
-  token: null,
-  user: {},
-  hasError: false,
-  isLoading: false,
-});
-
-export type ISession = Map<string, any>;
+import { Map } from 'immutable';
+import { SessionActions } from '../../actions/session.actions';
+import { ISession, IUser, UserRecord } from './session.types';
+import { INITIAL_STATE } from './session.initial-state';
 
 export function sessionReducer(
   state: ISession = INITIAL_STATE,
-  action: any = {type: ''}) {
+  action: any): ISession {
 
   switch (action.type) {
-  case SessionActions.LOGIN_USER_PENDING:
+  case SessionActions.LOGIN_USER:
     return state.merge({
       token: null,
-      user: {},
+      user: UserRecord({}),
       hasError: false,
       isLoading: true,
     });
@@ -26,13 +19,15 @@ export function sessionReducer(
   case SessionActions.LOGIN_USER_SUCCESS:
     return state.merge({
       token: action.payload.token,
-      user: action.payload.profile,
+      user: UserRecord(action.payload.profile),
       hasError: false,
       isLoading: false,
     });
 
   case SessionActions.LOGIN_USER_ERROR:
     return state.merge({
+      token: null,
+      user: UserRecord({}),
       hasError: true,
       isLoading: false,
     });

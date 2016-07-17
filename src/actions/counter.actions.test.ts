@@ -1,5 +1,5 @@
 import { NgRedux } from 'ng2-redux';
-import { CounterActions } from './counter';
+import { CounterActions } from './counter.actions';
 import {
   beforeEach,
   describe,
