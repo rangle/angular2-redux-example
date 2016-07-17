@@ -1,11 +1,12 @@
 import { Map } from 'immutable';
+import { IPayloadAction } from '../../actions';
 import { SessionActions } from '../../actions/session.actions';
 import { ISession, IUser, UserRecord } from './session.types';
 import { INITIAL_STATE } from './session.initial-state';
 
 export function sessionReducer(
   state: ISession = INITIAL_STATE,
-  action: any): ISession {
+  action: IPayloadAction): ISession {
 
   switch (action.type) {
   case SessionActions.LOGIN_USER:
@@ -33,7 +34,7 @@ export function sessionReducer(
     });
 
   case SessionActions.LOGOUT_USER:
-    return state.merge(INITIAL_STATE);
+    return INITIAL_STATE;
 
   default:
     return state;

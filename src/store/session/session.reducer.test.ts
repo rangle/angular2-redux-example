@@ -1,65 +1,53 @@
 import { Iterable } from 'immutable';
-import fireAction from '../../utils/fire-action';
+import { ISession } from './session.types';
 import { sessionReducer } from './session.reducer';
 import { SessionActions } from '../../actions/session.actions';
 
-let state = sessionReducer(undefined, { type: 'TEST_INIT'});
-
 describe('Session Reducer', () => {
-  describe('inital state', () => {
-    it('should be immutable', () => {
-      expect(Iterable.isIterable(state)).toBe(true);
-    });
+  let initState: ISession;
+
+  beforeEach(() => {
+    initState = sessionReducer(undefined, { type: 'TEST_INIT'});
   });
 
-  describe('on LOGIN_USER_PENDING', () => {
-    it('should set loading to true', () => {
-      state = fireAction(
-        sessionReducer,
-        state,
-        SessionActions.LOGIN_USER);
-      expect(state.get('isLoading')).toBeTruthy;
-      expect(state.get('token')).toEqual(null);
-    });
+  it('should have an immutable initial state', () => {
+    expect(Iterable.isIterable(initState)).toBe(true);
   });
 
-  describe('on LOGIN_USER_SUCCESS', () => {
-    it('should save the user token', () => {
-      state = fireAction(
-        sessionReducer,
-        state,
-        SessionActions.LOGIN_USER_SUCCESS,
-        { token: 1234 });
-
-      expect(state.get('isLoading')).toBeFalsy;
-      expect(state.get('hasError')).toBeFalsy;
-      expect(state.get('token')).toEqual(1234);
-    });
+  it('should set loading to true on LOGIN_USER_PENDING', () => {
+    const nextState = sessionReducer(
+      initState,
+      { type: SessionActions.LOGIN_USER });
+    expect(nextState.get('isLoading')).toBeTruthy;
+    expect(nextState.get('token')).toEqual(null);
   });
 
-  describe('on LOGIN_USER_ERROR', () => {
-    it('should save the username', () => {
-      state = fireAction(
-        sessionReducer,
-        state,
-        SessionActions.LOGIN_USER_ERROR);
-
-      expect(state.get('isLoading')).toBeFalsy;
-      expect(state.get('hasError')).toBeTruthy;
-    });
+  it('should save the user token on LOGIN_USER_SUCCESS', () => {
+    const nextState = sessionReducer(
+      initState,
+      {
+        type: SessionActions.LOGIN_USER_SUCCESS,
+        payload: { token: 1234 }
+      });
+    expect(nextState.get('isLoading')).toBeFalsy;
+    expect(nextState.get('hasError')).toBeFalsy;
+    expect(nextState.get('token')).toEqual(1234);
   });
 
+  it('should flag an error on LOGIN_USER_ERROR', () => {
+    const nextState = sessionReducer(
+      initState,
+      { type: SessionActions.LOGIN_USER_ERROR });
+    expect(nextState.get('isLoading')).toBeFalsy;
+    expect(nextState.get('hasError')).toBeTruthy;
+  });
 
-  describe('on LOGOUT_USER', () => {
-    it('should save the username', () => {
-      state = fireAction(
-        sessionReducer,
-        state,
-        SessionActions.LOGOUT_USER);
-
-      expect(state.get('isLoading')).toBeTruthy;
-      expect(state.get('hasError')).toBeFalsy;
-      expect(state.get('token')).toEqual(null);
-    });
+  it('should clear user data on LOGOUT_USER', () => {
+    const nextState = sessionReducer(
+      initState,
+      { type: SessionActions.LOGOUT_USER });
+    expect(nextState.get('isLoading')).toBeTruthy;
+    expect(nextState.get('hasError')).toBeFalsy;
+    expect(nextState.get('token')).toEqual(null);
   });
 });

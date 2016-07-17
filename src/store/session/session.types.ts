@@ -2,13 +2,13 @@ import { Record, Map } from 'immutable';
 
 export const UserRecord = Record({
   firstName: '',
-  lastName: ''
+  lastName: '',
 });
 
 export interface IUser extends Map<string, any> {
   firstName: string;
   lastName: string;
-  set: (prop: string, val: any) => ISession;
+  set: (prop: string, val: any) => IUser;
 };
 
 // Allows you to call '.token', etc., directly instead of having to

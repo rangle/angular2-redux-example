@@ -1,36 +1,39 @@
 import { Iterable } from 'immutable';
-import fireAction from '../../utils/fire-action';
 import { counterReducer } from './counter.reducer';
-import { CounterActions } from '../../actions/counter.actions';
-
-let state = counterReducer(undefined, { type: 'TEST_INIT '});
+import { CounterActions, SessionActions } from '../../actions';
+import { ICounter } from './counter.types';
 
 describe('counter reducer', () => {
-  describe('inital state', () => {
-    it('should be immutable', () => {
-      expect(Iterable.isIterable(state)).toBe(true);
-    });
+  let initState: ICounter;
+
+  beforeEach(() => {
+    initState = counterReducer(undefined, { type: 'TEST_INIT '});
   });
 
-  describe('on INCREMENT_COUNTER', () => {
-    it('should increment state.count', () => {
-      const previousValue = state.counter;
-      state = fireAction(
-        counterReducer,
-        state,
-        CounterActions.INCREMENT_COUNTER);
-      expect(state.counter).toEqual(1);
-    });
+  it('should have an immutable initial state', () => {
+    expect(Iterable.isIterable(initState)).toBe(true);
+  });
+  
+  it('should increment state.count on INCREMENT_COUNTER', () => {
+    const previousValue = initState.counter;
+    const nextState = counterReducer(
+      initState,
+      { type: CounterActions.INCREMENT_COUNTER });
+    expect(nextState.counter).toEqual(1);
   });
 
-  describe('on DECREMENT_COUNTER', () => {
-    it('should decrement state.count', () => {
-      const previousValue = state.counter;
-      state = fireAction(
-        counterReducer,
-        state,
-        CounterActions.DECREMENT_COUNTER);
-      expect(state.counter).toEqual(previousValue - 1);
-    });
+  it('should decrement state.count on DECREMENT_COUNTER', () => {
+    const previousValue = initState.counter;
+    const nextState = counterReducer(
+      initState,
+      { type: CounterActions.DECREMENT_COUNTER });
+    expect(nextState.counter).toEqual(previousValue - 1);
+  });
+
+  it('should clear the counter on LOGOUT_USER', () => {
+    const nextState = counterReducer(
+      initState,
+      { type: SessionActions.LOGOUT_USER });
+    expect(nextState.counter).toBe(0);
   });
 });
