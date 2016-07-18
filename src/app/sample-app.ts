@@ -34,8 +34,8 @@ import {
 export class RioSampleApp {
   @select(['session', 'hasError']) hasError$: Observable<boolean>;
   @select(['session', 'isLoading']) isLoading$: Observable<boolean>;
-  @select(['session', 'user', 'firstName']) firstName$;
-  @select(['session', 'user', 'lastName']) lastName$;
+  @select(['session', 'user', 'firstName']) firstName$: Observable<string>;
+  @select(['session', 'user', 'lastName']) lastName$: Observable<string>;
   @select(s => !!s.session.token) loggedIn$: Observable<boolean>;
   @select(s => !s.session.token) loggedOut$: Observable<boolean>;
 

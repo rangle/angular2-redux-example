@@ -1,4 +1,4 @@
-import { beforeEachProviders, fakeAsync, inject } from '@angular/core/testing';
+import { addProviders, fakeAsync, inject } from '@angular/core/testing';
 import { provide } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -9,10 +9,12 @@ import { SessionEpics } from './session.epics';
 const mockHttp = <Http>{};
 
 describe('SessionEpics', () => {
-   beforeEachProviders(() => [
-     SessionEpics,
-     provide(Http, { useValue: mockHttp }),
-  ]);
+   beforeEach(() => {
+     addProviders([
+       SessionEpics,
+       provide(Http, { useValue: mockHttp }),
+     ]);
+  });
 
   it(
     'should process a successful login',
