@@ -1,5 +1,11 @@
-import { reimmutifyCounter } from './counter.transforms';
+import {
+  ICounterRecord,
+  ICounter,
+} from './counter.types';
+import { makeTypedFactory } from 'typed-immutable-record';
 
-export const INITIAL_STATE = reimmutifyCounter({
+export const CounterFactory = makeTypedFactory<ICounter, ICounterRecord>({
   counter: 0,
 });
+
+export const INITIAL_STATE = CounterFactory();

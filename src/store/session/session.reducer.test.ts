@@ -1,10 +1,10 @@
 import { Iterable } from 'immutable';
-import { ISession } from './session.types';
+import { ISessionRecord } from './session.types';
 import { sessionReducer } from './session.reducer';
 import { SessionActions } from '../../actions/session.actions';
 
 describe('Session Reducer', () => {
-  let initState: ISession;
+  let initState: ISessionRecord;
 
   beforeEach(() => {
     initState = sessionReducer(undefined, { type: 'TEST_INIT'});
@@ -28,7 +28,8 @@ describe('Session Reducer', () => {
       {
         type: SessionActions.LOGIN_USER_SUCCESS,
         payload: { token: 1234 }
-      });
+      }
+    );
     expect(nextState.get('isLoading')).toBeFalsy;
     expect(nextState.get('hasError')).toBeFalsy;
     expect(nextState.get('token')).toEqual(1234);

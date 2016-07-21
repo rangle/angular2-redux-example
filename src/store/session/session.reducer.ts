@@ -1,18 +1,22 @@
-import { Map } from 'immutable';
 import { IPayloadAction } from '../../actions';
 import { SessionActions } from '../../actions/session.actions';
-import { ISession, IUser, UserRecord } from './session.types';
-import { INITIAL_STATE } from './session.initial-state';
+import { ISessionRecord } from './session.types';
+import {
+  INITIAL_STATE,
+  INITIAL_USER_STATE,
+  UserFactory,
+} from './session.initial-state';
+
 
 export function sessionReducer(
-  state: ISession = INITIAL_STATE,
-  action: IPayloadAction): ISession {
+  state: ISessionRecord = INITIAL_STATE,
+  action: IPayloadAction): ISessionRecord {
 
   switch (action.type) {
   case SessionActions.LOGIN_USER:
     return state.merge({
       token: null,
-      user: UserRecord({}),
+      user: INITIAL_USER_STATE,
       hasError: false,
       isLoading: true,
     });
@@ -20,7 +24,7 @@ export function sessionReducer(
   case SessionActions.LOGIN_USER_SUCCESS:
     return state.merge({
       token: action.payload.token,
-      user: UserRecord(action.payload.profile),
+      user: UserFactory(action.payload.profile),
       hasError: false,
       isLoading: false,
     });
@@ -28,7 +32,7 @@ export function sessionReducer(
   case SessionActions.LOGIN_USER_ERROR:
     return state.merge({
       token: null,
-      user: UserRecord({}),
+      user: INITIAL_USER_STATE,
       hasError: true,
       isLoading: false,
     });

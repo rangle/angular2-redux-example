@@ -1,10 +1,9 @@
 import { ISession } from './session.types';
 import { sessionReducer } from './session.reducer';
-import { deimmutifySession, reimmutifySession } from './session.transforms';
+import { SessionFactory } from './session.initial-state';
 
 export {
   ISession,
   sessionReducer,
-  deimmutifySession,
-  reimmutifySession,
+  SessionFactory,
 }
