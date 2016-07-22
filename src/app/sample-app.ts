@@ -2,14 +2,15 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from 'ng2-redux';
+import { DevToolsExtension, NgRedux, select } from 'ng2-redux';
+import { NgReduxRouter } from 'ng2-redux-router';
 import { createEpicMiddleware } from 'redux-observable';
 
 import { IAppState, ISession, rootReducer } from '../store';
 import { SessionActions } from '../actions/session.actions';
 import { SessionEpics } from '../epics/session.epics';
 import { RioAboutPage, RioCounterPage } from '../pages';
-import { middleware, enhancers } from '../store';
+import { middleware, enhancers, reimmutify } from '../store';
 
 import {
   RioButton,
@@ -18,6 +19,8 @@ import {
   RioLogo,
   RioLoginModal
 } from '../components';
+
+declare const __DEV__: boolean; // from webpack
 
 @Component({
   selector: 'rio-sample-app',
@@ -40,11 +43,20 @@ export class RioSampleApp {
   @select(s => !s.session.token) loggedOut$: Observable<boolean>;
 
   constructor(
+    private devTools: DevToolsExtension,
     private ngRedux: NgRedux<IAppState>,
+    private ngReduxRouter: NgReduxRouter,
     private actions: SessionActions,
     private epics: SessionEpics) {
 
+    const enh = (__DEV__ && devTools.isEnabled()) ?
+      [ ... enhancers, devTools.enhancer({
+        deserializeState: reimmutify,
+      }) ] :
+      enhancers;
+
     middleware.push(createEpicMiddleware(this.epics.login));
     ngRedux.configureStore(rootReducer, {}, middleware, enhancers);
+    ngReduxRouter.initialize();
   }
 };

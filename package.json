@@ -93,6 +93,7 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "ng2-redux": "^3.3.2",
+    "ng2-redux-router": "^1.0.0",
     "nodemon": "^1.9.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

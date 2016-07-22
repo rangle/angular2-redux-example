@@ -11,6 +11,7 @@ export {
   ISession,
   ICounter,
   rootReducer,
+  reimmutify,
 };
 
 export let middleware = [];

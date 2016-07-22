@@ -11,7 +11,8 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { provideRouter } from '@angular/router';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { NgRedux } from 'ng2-redux';
+import { DevToolsExtension, NgRedux } from 'ng2-redux';
+import { NgReduxRouter } from 'ng2-redux-router';
 import { RioSampleApp, SAMPLE_APP_ROUTES } from './app';
 import { ACTION_PROVIDERS } from './actions';
 import { EPIC_PROVIDERS } from './epics';
@@ -27,7 +28,9 @@ if (__PRODUCTION__) {
 
 if (!__TEST__) {
   bootstrap(RioSampleApp, [
+    DevToolsExtension,
     NgRedux,
+    NgReduxRouter,
     ACTION_PROVIDERS,
     EPIC_PROVIDERS,
     HTTP_PROVIDERS,
