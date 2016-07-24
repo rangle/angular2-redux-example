@@ -1,10 +1,10 @@
 import { Iterable } from 'immutable';
 import { counterReducer } from './counter.reducer';
 import { CounterActions, SessionActions } from '../../actions';
-import { ICounter } from './counter.types';
+import { ICounterRecord } from './counter.types';
 
 describe('counter reducer', () => {
-  let initState: ICounter;
+  let initState: ICounterRecord;
 
   beforeEach(() => {
     initState = counterReducer(undefined, { type: 'TEST_INIT '});

@@ -1,10 +1,9 @@
 import { ICounter } from './counter.types';
 import { counterReducer } from './counter.reducer';
-import { deimmutifyCounter, reimmutifyCounter } from './counter.transforms';
+import { INITIAL_STATE } from './counter.initial-state';
 
 export {
   ICounter,
   counterReducer,
-  deimmutifyCounter,
-  reimmutifyCounter,
+  INITIAL_STATE,
 }
