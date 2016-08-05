@@ -58,7 +58,7 @@
     "awesome-typescript-loader": "^1.0.0",
     "babel-core": "^6.11.4",
     "babel-polyfill": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.13.1",
     "basscss": "^8.0.1",
     "basscss-addons": "^1.0.0-beta4",
     "basscss-basic": "^1.0.0",
