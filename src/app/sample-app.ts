@@ -20,8 +20,6 @@ import {
   RioLoginModal
 } from '../components';
 
-declare const __DEV__: boolean; // from webpack
-
 @Component({
   selector: 'rio-sample-app',
   directives: [

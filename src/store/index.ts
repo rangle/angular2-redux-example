@@ -4,7 +4,6 @@ import { ISession } from './session';
 
 const createLogger = require('redux-logger');
 const persistState = require('redux-localstorage');
-declare const __DEV__: boolean; // from webpack
 
 export {
   IAppState,
@@ -15,7 +14,7 @@ export {
 };
 
 export let middleware = [];
-export let enhancers = [ 
+export let enhancers = [
   persistState(
     '',
     {

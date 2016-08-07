@@ -17,9 +17,6 @@ import { RioSampleApp, SAMPLE_APP_ROUTES } from './app';
 import { ACTION_PROVIDERS } from './actions';
 import { EPIC_PROVIDERS } from './epics';
 
-declare const __PRODUCTION__: boolean;
-declare const __TEST__: boolean;
-
 if (__PRODUCTION__) {
   enableProdMode();
 } else {
