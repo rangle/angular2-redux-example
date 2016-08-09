@@ -5,12 +5,10 @@
     [isPending]="isLoading$ | async"
     *ngIf="loggedOut$ | async">
   </rio-login-modal>
-
   <rio-navigator testid="navigator">
     <rio-navigator-item [mr]=true>
       <rio-logo></rio-logo>
     </rio-navigator-item>
-
     <rio-navigator-item *ngIf="loggedIn$ | async" [mr]=true>
       <a [routerLink]="['/counter']"
         class="text-decoration-none">Counter</a>

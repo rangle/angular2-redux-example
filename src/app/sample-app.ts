@@ -54,6 +54,7 @@ export class RioSampleApp {
       enhancers;
 
     middleware.push(createEpicMiddleware(this.epics.login));
+
     ngRedux.configureStore(rootReducer, {}, middleware, enhancers);
     ngReduxRouter.initialize();
   }
