@@ -117,7 +117,7 @@
     "ts-helpers": "^1.1.1",
     "tslint": "^3.12.1",
     "tslint-loader": "^2.1.0",
-    "typed-immutable-record": "0.0.3",
+    "typed-immutable-record": "0.0.5",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
     "webpack": "^1.13.0",
