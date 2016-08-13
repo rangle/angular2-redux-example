@@ -9,8 +9,6 @@ import { ICounter } from '../store';
 @Component({
   selector: 'counter-page',
   providers: [ CounterActions ],
-  directives: [ RioContainer, RioCounter ],
-  pipes: [ AsyncPipe ],
   template: `
     <rio-container testid="counter" [size]=2 [center]=true>
       <h2 data-testid="counter-heading" id="qa-counter-heading"

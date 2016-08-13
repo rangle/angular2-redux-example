@@ -1,5 +1,8 @@
-import { RouterConfig } from '@angular/router';
-import { RioCounterPage, RioAboutPage } from '../pages';
+import {RouterConfig} from '@angular/router';
+import {
+  RioCounterPage,
+  RioAboutPage
+} from '../pages';
 
 export const SAMPLE_APP_ROUTES: RouterConfig = [{
   pathMatch: 'full',

@@ -1,26 +1,27 @@
 import {
-  beforeEach,
-  addProviders,
-  describe,
-  expect,
-  it,
-  inject,
+  inject
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioModalContent } from './modal-content.component';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Modal Content', () => {
-  let builder: TestComponentBuilder;
+  let fixture;
 
-  beforeEach(() => addProviders([RioModalContent]));
-
-  beforeEach(inject([TestComponentBuilder],
-    function (tcb: TestComponentBuilder) {
-      builder = tcb;
-    }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        RioModalContent,
+        RioModalContentTestController
+      ],
+      providers: [
+        RioModalContent
+      ]
+    });
+    fixture = TestBed.createComponent(RioModalContentTestController);
+    fixture.detectChanges();
+  });
 
   it('should inject the component', inject([RioModalContent],
     (component: RioModalContent) => {
@@ -28,14 +29,13 @@ describe('Component: Modal Content', () => {
     }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(RioModalContentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        fixture.autoDetectChanges();
-        let query = fixture.debugElement
-          .query(By.directive(RioModalContent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
+    fixture.whenStable().then(() => {
+      fixture.autoDetectChanges();
+      let query = fixture.debugElement
+        .query(By.directive(RioModalContent));
+      expect(query).toBeTruthy();
+      expect(query.componentInstance).toBeTruthy();
+    });
   }));
 });
 
@@ -43,8 +43,7 @@ describe('Component: Modal Content', () => {
   selector: 'test',
   template: `
     <rio-modal-content></rio-modal-content>
-  `,
-  directives: [RioModalContent]
+  `
 })
 class RioModalContentTestController {}
 

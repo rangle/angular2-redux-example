@@ -1,25 +1,31 @@
 import {
   async,
-  describe,
-  expect,
-  it,
-  inject,
+  inject
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { RioLogo } from './index';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Logo', () => {
+  let fixture;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        RioLogo
+      ]
+    });
+    fixture = TestBed.createComponent(RioLogo);
+    fixture.detectChanges();
+  });
 
   it('should set the image location',
-    async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-      return tcb.createAsync(RioLogo)
-        .then((fixture: ComponentFixture<any>) => {
-          fixture.componentInstance.LogoImage = 'data:image/gif;base64,fake';
-          fixture.detectChanges();
-          let compiled = fixture.debugElement.nativeElement;
-          expect(compiled.querySelector('img').getAttribute('src'))
-            .toBe('data:image/gif;base64,fake');
-        });
+    async(inject([], () => {
+      fixture.whenStable().then(() => {
+        fixture.componentInstance.LogoImage = 'data:image/gif;base64,fake';
+        fixture.detectChanges();
+        let compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('img').getAttribute('src'))
+          .toBe('data:image/gif;base64,fake');
+      });
     })));
 });

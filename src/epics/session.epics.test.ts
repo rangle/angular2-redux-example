@@ -1,55 +1,90 @@
-import { addProviders, fakeAsync, inject } from '@angular/core/testing';
-import { provide } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {
+  fakeAsync,
+  inject
+} from '@angular/core/testing';
+import {
+  HttpModule,
+  XHRBackend,
+  ResponseOptions,
+  Response
+} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
-import { SessionActions } from '../actions/session.actions';
-import { SessionEpics } from './session.epics';
-
-const mockHttp = <Http>{};
+import {SessionActions} from '../actions/session.actions';
+import {SessionEpics} from './session.epics';
+import {TestBed} from '@angular/core/testing/test_bed';
+import {
+  MockBackend,
+  MockConnection
+} from '@angular/http/testing/mock_backend';
 
 describe('SessionEpics', () => {
-   beforeEach(() => {
-     addProviders([
-       SessionEpics,
-       provide(Http, { useValue: mockHttp }),
-     ]);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpModule],
+      providers: [
+        {
+          provide: XHRBackend,
+          useClass: MockBackend
+        },
+        SessionEpics
+      ]
+    });
   });
 
   it(
     'should process a successful login',
-    fakeAsync(inject([SessionEpics], sessionEpics => {
+    fakeAsync(
+      inject([
+        XHRBackend,
+        SessionEpics
+      ], (mockBackend, sessionEpics) => {
+        mockBackend.connections.subscribe(
+          (connection: MockConnection) => {
+            connection.mockRespond(new Response(
+              new ResponseOptions({
+                  body: {
+                    meta: {
+                      token: '123',
+                      user: {
+                        firstName: 'John',
+                        lastName: 'Doe'
+                      }
+                    }
+                  }
+                }
+              )
+            ));
+          });
 
-      mockHttp.post = jasmine.createSpy('post')
-        .and.returnValue(Observable.of({
-          json: () => ({
-            meta: {
-              token: '123',
-              user: { firstName: 'John', lastName: 'Doe' }
-            }
-          })
-        }));
-
-      const action$ = Observable.of({ type: SessionActions.LOGIN_USER });
-      sessionEpics.login(action$)
-        .subscribe(
-          action => expect(action).toEqual({
-            type: SessionActions.LOGIN_USER_SUCCESS,
-            payload: {
-              token: '123',
-              user: { firstName: 'John', lastName: 'Doe' }
-            }
-          }));
-    })));
+        const action$ = Observable.of({type: SessionActions.LOGIN_USER});
+        sessionEpics.login(action$)
+          .subscribe(
+            action => expect(action).toEqual({
+              type: SessionActions.LOGIN_USER_SUCCESS,
+              payload: {
+                token: '123',
+                user: {
+                  firstName: 'John',
+                  lastName: 'Doe'
+                }
+              }
+            })
+          );
+      })));
 
   it(
     'should process a login error',
-    fakeAsync(inject([SessionEpics], sessionEpics => {
+    fakeAsync(inject([
+      XHRBackend,
+      SessionEpics
+    ], (mockBackend, sessionEpics) => {
+      mockBackend.connections.subscribe(
+        (connection: MockConnection) => {
+          connection.mockError(new Error('some error'));
+        });
 
-      mockHttp.post = jasmine.createSpy('post')
-        .and.returnValue(Observable.throw(new Error('It failed')));
-
-      const action$ = Observable.of({ type: SessionActions.LOGIN_USER });
+      const action$ = Observable.of({type: SessionActions.LOGIN_USER});
       sessionEpics.login(action$)
         .subscribe(
           action => expect(action).toEqual({

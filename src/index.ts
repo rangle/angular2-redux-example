@@ -6,16 +6,12 @@ import '../shims/shims_for_IE';
 import 'zone.js/dist/zone';
 import 'ts-helpers';
 
-import { enableProdMode } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { HTTP_PROVIDERS } from '@angular/http';
-import { provideRouter } from '@angular/router';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { DevToolsExtension, NgRedux } from 'ng2-redux';
-import { NgReduxRouter } from 'ng2-redux-router';
-import { RioSampleApp, SAMPLE_APP_ROUTES } from './app';
-import { ACTION_PROVIDERS } from './actions';
-import { EPIC_PROVIDERS } from './epics';
+// The browser platform with a compiler
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
+// The app module
+import {RioSampleAppModule} from './app/sample-app.module';
+import {enableProdMode} from '@angular/core';
 
 if (__PRODUCTION__) {
   enableProdMode();
@@ -24,15 +20,6 @@ if (__PRODUCTION__) {
 }
 
 if (!__TEST__) {
-  bootstrap(RioSampleApp, [
-    DevToolsExtension,
-    NgRedux,
-    NgReduxRouter,
-    ACTION_PROVIDERS,
-    EPIC_PROVIDERS,
-    HTTP_PROVIDERS,
-    provideRouter(SAMPLE_APP_ROUTES),
-    disableDeprecatedForms(),
-    provideForms()
-  ]);
+  // Compile and launch the module
+  platformBrowserDynamic().bootstrapModule(RioSampleAppModule);
 }

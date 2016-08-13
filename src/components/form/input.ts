@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormControl } from '@angular/forms';
+import {
+  Component,
+  Input
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'rio-input',
-  directives: [REACTIVE_FORM_DIRECTIVES],
   template: `
     <input
       [id]="qaid"
@@ -17,6 +19,6 @@ import { REACTIVE_FORM_DIRECTIVES, FormControl } from '@angular/forms';
 export class RioInput {
   @Input() inputType = 'text';
   @Input() placeholder = '';
-  @Input() control: FormControl;
+  @Input() control: FormControl = new FormControl();
   @Input() qaid: string;
 };

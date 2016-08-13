@@ -3,7 +3,6 @@ import { REACTIVE_FORM_DIRECTIVES, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'rio-form',
-  directives: [REACTIVE_FORM_DIRECTIVES],
   template: `
     <form [formGroup]="group"
       (ngSubmit)="onSubmit.emit($event)">

@@ -1,45 +1,47 @@
 import {
   async,
-  beforeEach,
-  addProviders,
-  describe,
-  expect,
-  it,
-  inject,
+  inject
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { RioInput } from './input';
 import {
-  disableDeprecatedForms,
-  provideForms, 
-  FormControl
+  FormControl,
+  ReactiveFormsModule
 } from '@angular/forms';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Form Input', () => {
-  beforeEach(() => addProviders([
-    disableDeprecatedForms(),
-    provideForms()
-  ]));
+  let fixture;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        RioInput
+      ]
+    });
+    fixture = TestBed.createComponent(RioInput);
+    fixture.detectChanges();
+  });
 
   it('should render the input with the correct property values',
-    async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-      return tcb.createAsync(RioInput)
-        .then((fixture: ComponentFixture<any>) => {
-          fixture.componentInstance.control = new FormControl('');
-          fixture.componentInstance.qaid = 'input-1';
-          fixture.componentInstance.placeholder = 'test placeholder';
-          fixture.detectChanges();
-          let compiled = fixture.debugElement.nativeElement;
-          expect(compiled.querySelector('#input-1')
-            .getAttribute('placeholder')).toBe('test placeholder');
-          expect(compiled.querySelector('#input-1')
-            .getAttribute('type')).toBe('text');
-          fixture.componentInstance.inputType = 'password';
-          fixture.detectChanges();
-          expect(compiled.querySelector('#input-1')
-            .getAttribute('type')).toBe('password');
-        });
+    async(inject([], () => {
+      fixture.whenStable().then(() => {
+        fixture.componentInstance.control = new FormControl('');
+        fixture.componentInstance.qaid = 'input-1';
+        fixture.componentInstance.placeholder = 'test placeholder';
+        fixture.detectChanges();
+        let compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('#input-1')
+          .getAttribute('placeholder')).toBe('test placeholder');
+        expect(compiled.querySelector('#input-1')
+          .getAttribute('type')).toBe('text');
+        fixture.componentInstance.inputType = 'password';
+        fixture.detectChanges();
+        expect(compiled.querySelector('#input-1')
+          .getAttribute('type')).toBe('password');
+      });
     })
   ));
 

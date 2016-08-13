@@ -14,15 +14,16 @@ import 'zone.js/dist/sync-test';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
 
-import {setBaseTestProviders} from '@angular/core/testing';
-
+import {TestBed} from '@angular/core/testing';
 import {
-  TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
-  TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 
-setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
-  TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+TestBed.initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
 
 const testContext = (<{ context?: Function }>require)
   .context('./', true, /^(.(?!tests\.entry))*\.ts$/);

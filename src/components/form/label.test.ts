@@ -1,27 +1,28 @@
 import {
   async,
-  beforeEach,
-  addProviders,
-  describe,
-  expect,
-  it,
   inject,
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioLabel } from './label';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Navigator', () => {
-  let builder: TestComponentBuilder;
+  let fixture;
 
-  beforeEach(() => addProviders([RioLabel]));
-  
-  beforeEach(inject([TestComponentBuilder],
-    function (tcb: TestComponentBuilder) {
-      builder = tcb;
-    }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        RioLabel,
+        RioLabelTestController
+      ],
+      providers: [
+        RioLabel
+      ]
+    });
+    fixture = TestBed.createComponent(RioLabelTestController);
+    fixture.detectChanges();
+  });
 
   it('should inject the component', inject([RioLabel],
     (component: RioLabel) => {
@@ -29,19 +30,17 @@ describe('Component: Navigator', () => {
     }));
 
   it('should create the component', async(inject([], () => {
-    return builder.createAsync(RioLabelTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        fixture.autoDetectChanges();
-        let query = fixture.debugElement
-          .query(By.directive(RioLabel));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
+    fixture.whenStable().then(() => {
+      fixture.autoDetectChanges();
+      let query = fixture.debugElement
+        .query(By.directive(RioLabel));
+      expect(query).toBeTruthy();
+      expect(query.componentInstance).toBeTruthy();
+    });
   })));
 
     it('should set the id to qaid value', async(inject([], () => {
-    return builder.createAsync(RioLabelTestController)
-      .then((fixture: ComponentFixture<any>) => {
+      fixture.whenStable().then(() => {
         fixture.autoDetectChanges();
         let query = fixture.debugElement
           .query(By.directive(RioLabel));
@@ -55,9 +54,9 @@ describe('Component: Navigator', () => {
   selector: 'test',
   template: `
     <rio-label
-      qaid="test-1"></rio-label>
-  `,
-  directives: [RioLabel]
+      qaid="test-1">
+    </rio-label>
+  `
 })
 class RioLabelTestController { }
 

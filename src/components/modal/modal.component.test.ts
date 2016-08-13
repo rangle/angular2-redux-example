@@ -1,27 +1,28 @@
 import {
   async,
-  beforeEach,
-  addProviders,
-  describe,
-  expect,
-  it,
-  inject,
+  inject
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioModal } from './modal.component';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Modal', () => {
-  let builder: TestComponentBuilder;
+  let fixture;
 
-  beforeEach(() => addProviders([RioModal]));
-
-  beforeEach(inject([TestComponentBuilder],
-    function (tcb: TestComponentBuilder) {
-      builder = tcb;
-    }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        RioModal,
+        RioModalTestController
+      ],
+      providers: [
+        RioModal
+      ]
+    });
+    fixture = TestBed.createComponent(RioModalTestController);
+    fixture.detectChanges();
+  });
 
   it('should inject the component', inject([RioModal],
     (component: RioModal) => {
@@ -29,14 +30,13 @@ describe('Component: Modal', () => {
     }));
 
   it('should create the component', async(inject([], () => {
-    return builder.createAsync(RioModalTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        fixture.autoDetectChanges();
-        let query = fixture.debugElement
-          .query(By.directive(RioModal));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
+    fixture.whenStable().then(() => {
+      fixture.autoDetectChanges();
+      let query = fixture.debugElement
+        .query(By.directive(RioModal));
+      expect(query).toBeTruthy();
+      expect(query.componentInstance).toBeTruthy();
+    });
   })));
 });
 
@@ -44,8 +44,7 @@ describe('Component: Modal', () => {
   selector: 'test',
   template: `
     <rio-modal></rio-modal>
-  `,
-  directives: [RioModal]
+  `
 })
 class RioModalTestController {}
 

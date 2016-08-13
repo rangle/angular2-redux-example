@@ -1,39 +1,37 @@
 import {
   async,
-  beforeEach,
-  addProviders,
-  describe,
-  expect,
-  it,
   inject,
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder }
-from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioForm } from './form';
 import {
-  REACTIVE_FORM_DIRECTIVES,
-  disableDeprecatedForms,
-  provideForms,
   FormGroup,
   FormControl,
-  FormBuilder
+  FormBuilder,
+  ReactiveFormsModule
 } from '@angular/forms';
+import {TestBed} from '@angular/core/testing/test_bed';
 
 describe('Component: Form', () => {
-  let builder: TestComponentBuilder;
+  let fixture;
 
-  beforeEach(() => addProviders([
-    disableDeprecatedForms(),
-    provideForms(),
-    RioForm
-  ]));
-
-  beforeEach(inject([TestComponentBuilder],
-    function (tcb: TestComponentBuilder) {
-      builder = tcb;
-    }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        RioForm,
+        RioFormTestController
+      ],
+      providers: [
+        RioForm
+      ]
+    });
+    fixture = TestBed.createComponent(RioFormTestController);
+    fixture.detectChanges();
+  });
 
   it('should inject the component', inject([RioForm],
     (component: RioForm) => {
@@ -41,29 +39,27 @@ describe('Component: Form', () => {
     }));
 
   it('should create the component', async(inject([], () => {
-    return builder.createAsync(RioFormTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        fixture.autoDetectChanges();
-        let query = fixture.debugElement
-          .query(By.directive(RioForm));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-        expect(query.componentInstance.onSubmit).toBeTruthy();
-        expect(query.componentInstance.group).toBeTruthy();
-      });
+    fixture.whenStable().then(() => {
+      fixture.autoDetectChanges();
+      let query = fixture.debugElement
+        .query(By.directive(RioForm));
+      expect(query).toBeTruthy();
+      expect(query.componentInstance).toBeTruthy();
+      expect(query.componentInstance.onSubmit).toBeTruthy();
+      expect(query.componentInstance.group).toBeTruthy();
+    });
   })));
 
   it('should emit event when onSubmit is invoked', async(inject([], () => {
-    return builder.createAsync(RioFormTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        fixture.autoDetectChanges();
-        let query = fixture.debugElement
-          .query(By.directive(RioForm));
-        query.componentInstance.onSubmit.subscribe(c => {
-          expect(c).toBeDefined();
-        });
-        query.nativeElement.querySelector('button').click();
+    fixture.whenStable().then(() => {
+      fixture.autoDetectChanges();
+      let query = fixture.debugElement
+        .query(By.directive(RioForm));
+      query.componentInstance.onSubmit.subscribe(c => {
+        expect(c).toBeDefined();
       });
+      query.nativeElement.querySelector('button').click();
+    });
   })));
 
 });
@@ -76,9 +72,8 @@ describe('Component: Form', () => {
       <input
         [formControl]="field1">
       <button type="submit">submit</button>
-      </rio-form>
-  `,
-  directives: [REACTIVE_FORM_DIRECTIVES, RioForm],
+    </rio-form>
+  `
 })
 class RioFormTestController {
   private group: FormGroup;

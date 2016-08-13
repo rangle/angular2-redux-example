@@ -7,17 +7,8 @@ import {
   Validators
 } from '@angular/forms';
 
-import { RioForm, RioFormError, RioFormGroup, RioLabel } from '../form';
-import { RioAlert } from '../alert';
-import { RioButton } from '../button';
-import { RioInput } from '../form/input';
-
 @Component({
   selector: 'rio-login-form',
-  directives: [
-    RioAlert, RioButton, RioInput,
-    RioForm, RioFormError, RioFormGroup, RioLabel
-  ],
   template: `
     <rio-form
       [group]="group"
@@ -87,9 +78,11 @@ export class RioLoginForm {
   @Input() isPending: boolean;
   @Input() hasError: boolean;
   @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
-  private username: FormControl;
-  private password: FormControl;
-  private group: FormGroup;
+
+  // needed to be public to allow access from fixture tests
+  username: FormControl;
+  password: FormControl;
+  group: FormGroup;
 
   constructor(private builder: FormBuilder) {
     this.reset();

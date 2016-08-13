@@ -22,11 +22,6 @@ import {
 
 @Component({
   selector: 'rio-sample-app',
-  directives: [
-    ROUTER_DIRECTIVES, RioNavigator, RioNavigatorItem,
-    RioLoginModal, RioLogo, RioButton
-  ],
-  pipes: [ AsyncPipe ],
   // Allow app to define global styles.
   encapsulation: ViewEncapsulation.None,
   styles: [ require('../styles/index.css') ],

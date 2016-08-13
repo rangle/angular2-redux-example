@@ -3,7 +3,6 @@ import { RioContainer } from '../components';
 
 @Component({
   selector: 'rio-about-page',
-  directives: [ RioContainer ],
   template: `
     <rio-container [size]=4 [center]=true>
       <h2 class="caps">About Us</h2>
