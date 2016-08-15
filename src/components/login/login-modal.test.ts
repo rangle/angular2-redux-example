@@ -2,36 +2,17 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import {
-  RioLoginModal,
-  RioLoginForm
-} from './index';
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
+import {RioLoginModal} from './index';
+import {RioLoginModule} from './login.module';
 import {TestBed} from '@angular/core/testing/test_bed';
-import {
-  RioForm,
-  RioInput,
-  RioFormError
-} from '../form';
 
 describe('Component: Login Modal', () => {
   let fixture;
 
-  /*
-   * Interesting to note, building up a test bed like this really
-   * helps inform what could - or should - be a module.
-   */
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [
-        RioLoginModal,
-        RioLoginForm,
-        RioForm,
-        RioInput,
-        RioFormError
+      imports: [
+        RioLoginModule
       ]
     });
     fixture = TestBed.createComponent(RioLoginModal);

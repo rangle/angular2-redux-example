@@ -2,8 +2,9 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioNavigatorItem } from './navigator-item.component';
+import {RioNavigatorItem} from './navigator-item.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioNavigatorModule} from './navigator.module';
 
 
 describe('Component: Navigator Item', () => {
@@ -11,8 +12,8 @@ describe('Component: Navigator Item', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        RioNavigatorItem
+      imports: [
+        RioNavigatorModule
       ]
     });
     fixture = TestBed.createComponent(RioNavigatorItem);

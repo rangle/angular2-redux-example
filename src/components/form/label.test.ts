@@ -6,14 +6,17 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RioLabel } from './label';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioFormModule} from './form.module';
 
 describe('Component: Navigator', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RioFormModule
+      ],
       declarations: [
-        RioLabel,
         RioLabelTestController
       ],
       providers: [

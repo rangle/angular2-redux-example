@@ -2,18 +2,21 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { RioModal } from './modal.component';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {RioModal} from './modal.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioModalModule} from './modal.module';
 
 describe('Component: Modal', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RioModalModule
+      ],
       declarations: [
-        RioModal,
         RioModalTestController
       ],
       providers: [

@@ -2,16 +2,17 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioLogo } from './index';
+import {RioLogo} from './index';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioUiModule} from '../ui/ui.module';
 
 describe('Component: Logo', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        RioLogo
+      imports: [
+        RioUiModule
       ]
     });
     fixture = TestBed.createComponent(RioLogo);

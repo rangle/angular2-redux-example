@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { ICounter } from '../../store';
-import { RioButton } from '../button';
 
 @Component({
   selector: 'rio-counter',
@@ -32,7 +31,6 @@ import { RioButton } from '../button';
       </rio-button>
     </div>
   `,
-  directives: [RioButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RioCounter {
