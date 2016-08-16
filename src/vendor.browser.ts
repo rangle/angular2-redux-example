@@ -1,0 +1,20 @@
+import 'reflect-metadata';
+import 'babel-polyfill';
+import 'core-js/es6';
+import 'core-js/es7/reflect';
+import '../shims/shims_for_IE';
+import 'ts-helpers';
+
+import '@angular/core';
+import '@angular/compiler';
+import '@angular/common';
+import '@angular/forms';
+import '@angular/http';
+import '@angular/platform-browser';
+import '@angular/platform-browser-dynamic';
+import '@angular/router';
+import 'ng2-redux';
+import 'ng2-redux-router';
+import 'immutable';
+import 'rxjs';
+import 'zone.js';

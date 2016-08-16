@@ -4,10 +4,10 @@ import {
 } from '@angular/core/testing';
 import { RioInput } from './input';
 import {
-  FormControl,
-  ReactiveFormsModule
+  FormControl
 } from '@angular/forms';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioFormModule} from './form.module';
 
 describe('Component: Form Input', () => {
   let fixture;
@@ -15,10 +15,7 @@ describe('Component: Form Input', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule
-      ],
-      declarations: [
-        RioInput
+        RioFormModule
       ]
     });
     fixture = TestBed.createComponent(RioInput);

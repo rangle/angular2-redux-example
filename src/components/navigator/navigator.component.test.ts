@@ -2,18 +2,21 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { RioNavigator } from './navigator.component';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {RioNavigator} from './navigator.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioNavigatorModule} from './navigator.module';
 
 describe('Component: Navigator', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RioNavigatorModule
+      ],
       declarations: [
-        RioNavigator,
         RioNavigatorTestController
       ],
       providers: [

@@ -2,8 +2,9 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioContainer } from './container.component';
+import {RioContainer} from './container.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioUiModule} from '../ui/ui.module';
 
 describe('Component: Alert', () => {
 
@@ -11,8 +12,8 @@ describe('Component: Alert', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        RioContainer
+      imports: [
+        RioUiModule
       ]
     });
     fixture = TestBed.createComponent(RioContainer);
