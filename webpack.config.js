@@ -7,7 +7,10 @@ const plugins = require('./webpack/plugins');
 const postcssInit = require('./webpack/postcss');
 
 module.exports = {
-  entry: { app: './src/index.ts' },
+  entry: {
+    app: './src/index.ts',
+    vendor: './src/vendor.browser.ts',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js',
@@ -42,6 +45,7 @@ module.exports = {
       loaders.woff,
       loaders.woff2,
       loaders.ttf,
+      loaders.json,
     ],
     noParse: [ /zone\.js\/dist\/.+/, /angular2\/bundles\/.+/ ],
   },

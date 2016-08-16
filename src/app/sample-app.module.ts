@@ -14,14 +14,12 @@ import {FormBuilder} from '@angular/forms';
 import {RioSampleApp} from './sample-app';
 import {SessionActions} from '../actions/session.actions';
 import {SessionEpics} from '../epics/session.epics';
-import {
-  RioAboutPage,
-  RioCounterPage
-} from '../pages';
+import {RioCounterPage} from '../pages';
 import {RioCounter} from '../components/counter/counter.component';
 import {RioLoginModule} from '../components/login/login.module';
 import {RioUiModule} from '../components/ui/ui.module';
 import {RioNavigatorModule} from '../components/navigator/navigator.module';
+import {RioAboutPageModule} from '../pages/about.page.module';
 
 @NgModule({
   imports: [
@@ -30,11 +28,11 @@ import {RioNavigatorModule} from '../components/navigator/navigator.module';
     CommonModule,
     RioLoginModule,
     RioUiModule,
-    RioNavigatorModule
+    RioNavigatorModule,
+    RioAboutPageModule
   ],
   declarations: [
     RioSampleApp,
-    RioAboutPage,
     RioCounterPage,
     RioCounter
   ],
