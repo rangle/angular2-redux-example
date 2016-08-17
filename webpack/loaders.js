@@ -29,6 +29,12 @@ exports.css = {
   exclude: /node_modules/,
 };
 
+// Needed this since webpack was choking on json files within node_modules
+exports.json = {
+  test: /\.json$/,
+  loader: 'json-loader',
+};
+
 exports.svg = makeFileLoader(/\.svg$/);
 exports.eot = makeFileLoader(/\.eot$/);
 exports.woff = makeFileLoader(/\.woff$/);

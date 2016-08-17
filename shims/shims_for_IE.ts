@@ -3,7 +3,9 @@
 require('classlist-polyfill'); // classlist: IE9
 require('console-polyfill');   // console: IE9
 require('raf').polyfill();     // requestAnimationFrame: IE9, Android < 4.4
-require('html5-history-api');  // HTML5 History: IE9.
+
+// TODO: breaks with webpack2 and typescript2, find alternative
+// require('html5-history-api');  // HTML5 History: IE9.
 
 // Pulled from node_modules/angular2/es6/src/dev/testing/shims_for_IE.js to
 // work around https://github.com/angular/angular/issues/#6501.
