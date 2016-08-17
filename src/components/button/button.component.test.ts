@@ -2,16 +2,17 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioButton } from './button.component';
+import {RioButton} from './button.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioUiModule} from '../ui/ui.module';
 
 let fixture;
 
 describe('Component: Button', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        RioButton
+      imports: [
+        RioUiModule
       ]
     });
     fixture = TestBed.createComponent(RioButton);

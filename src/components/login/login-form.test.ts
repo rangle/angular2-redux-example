@@ -2,32 +2,17 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioLoginForm } from './index';
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
+import {RioLoginForm} from './index';
 import {TestBed} from '@angular/core/testing/test_bed';
-import {
-  RioForm,
-  RioInput,
-  RioFormError,
-} from '../form';
-import {RioButton} from '../button/button.component';
-import {RioAlert} from '../alert/alert.component';
+import {RioLoginModule} from './login.module';
 
 describe('Component: Login Form', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [
-        RioLoginForm,
-        RioForm,
-        RioInput,
-        RioFormError,
-        RioButton,
-        RioAlert
+      imports: [
+        RioLoginModule
       ]
     });
     fixture = TestBed.createComponent(RioLoginForm);

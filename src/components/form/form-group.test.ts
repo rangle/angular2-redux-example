@@ -2,11 +2,11 @@ import {
   async,
   inject,
 } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { RioFormGroup } from './form-group';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {RioFormGroup} from './form-group';
 import {TestBed} from '@angular/core/testing/test_bed';
-import {ReactiveFormsModule} from '@angular/forms';
+import {RioFormModule} from './form.module';
 
 describe('Component: Navigator', () => {
   let fixture;
@@ -14,10 +14,9 @@ describe('Component: Navigator', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule
+        RioFormModule
       ],
       declarations: [
-        RioFormGroup,
         RioFormGroupTestController
       ],
       providers: [

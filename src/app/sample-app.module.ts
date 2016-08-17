@@ -10,70 +10,32 @@ import {
   routing,
   appRoutingProviders
 } from './sample-app.routing';
-import {HttpModule} from '@angular/http';
-import {
-  FormBuilder,
-  ReactiveFormsModule
-} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {RioSampleApp} from './sample-app';
 import {SessionActions} from '../actions/session.actions';
 import {SessionEpics} from '../epics/session.epics';
 import {
-  RioLoginForm,
-  RioLoginModal
-} from '../components/login';
-import {
-  RioModalContent,
-  RioModal
-} from '../components/modal';
-import {
-  RioInput,
-  RioFormGroup,
-  RioFormError,
-  RioForm,
-  RioLabel
-} from '../components/form';
-import {
-  RioNavigator,
-  RioNavigatorItem
-} from '../components/navigator';
-import {RioAlert} from '../components/alert/alert.component';
-import {RioButton} from '../components/button/button.component';
-import {RioLogo} from '../components/logo/logo.component';
-import {RioAboutPage} from '../pages/about.page';
-import {RioCounterPage} from '../pages/counter.page';
-import {RioContainer} from '../components/container/container.component';
+  RioAboutPage,
+  RioCounterPage
+} from '../pages';
 import {RioCounter} from '../components/counter/counter.component';
+import {RioLoginModule} from '../components/login/login.module';
+import {RioUiModule} from '../components/ui/ui.module';
+import {RioNavigatorModule} from '../components/navigator/navigator.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     routing,
-    ReactiveFormsModule,
     CommonModule,
-    HttpModule
+    RioLoginModule,
+    RioUiModule,
+    RioNavigatorModule
   ],
   declarations: [
     RioSampleApp,
-    RioModal,
-    RioLoginModal,
-    RioLoginForm,
-    RioModalContent,
-    RioAlert,
-    RioButton,
-    RioInput,
-    RioForm,
-    RioFormError,
-    RioFormGroup,
-    RioLabel,
-    RioNavigator,
-    RioNavigatorItem,
-    RioLoginModal,
-    RioLogo,
-    RioButton,
     RioAboutPage,
     RioCounterPage,
-    RioContainer,
     RioCounter
   ],
   bootstrap: [

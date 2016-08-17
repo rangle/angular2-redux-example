@@ -3,8 +3,8 @@ import {
   inject
 } from '@angular/core/testing';
 import { RioFormError } from './form-error';
-import {ReactiveFormsModule} from '@angular/forms';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioFormModule} from './form.module';
 
 describe('Component: Form Error', () => {
   let fixture;
@@ -12,10 +12,7 @@ describe('Component: Form Error', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule
-      ],
-      declarations: [
-        RioFormError
+        RioFormModule
       ]
     });
     fixture = TestBed.createComponent(RioFormError);

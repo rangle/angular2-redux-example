@@ -2,17 +2,18 @@ import {
   async,
   inject
 } from '@angular/core/testing';
-import { RioAlert } from './alert.component';
+import {RioAlert} from './alert.component';
 import {TestBed} from '@angular/core/testing/test_bed';
+import {RioUiModule} from '../ui/ui.module';
 
 describe('Component: Alert', () => {
   let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        RioAlert
-      ],
+      imports: [
+        RioUiModule
+      ]
     });
     fixture = TestBed.createComponent(RioAlert);
     fixture.detectChanges();
