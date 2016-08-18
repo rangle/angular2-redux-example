@@ -2,15 +2,15 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es6",
+    "moduleResolution": "node",
     "target": "es6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": false,
-    "inlineSourceMap": true,
-    "noEmitHelpers": true
+    "inlineSourceMap": true
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,

@@ -9,6 +9,10 @@ exports.tslint = {
 exports.ts = {
   test: /\.ts$/,
   loader: 'awesome-typescript-loader',
+  query: {
+    useForkChecker: true,
+    tsconfig: './tsconfig.json',
+  },
   exclude: /node_modules/,
 };
 

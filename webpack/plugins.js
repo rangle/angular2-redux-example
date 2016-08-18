@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ForkCheckerPlugin =
+  require('awesome-typescript-loader').ForkCheckerPlugin;
 
 const sourceMap = process.env.TEST
   ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.ts$/ })]
@@ -20,6 +22,7 @@ const basePlugins = [
     template: './src/index.html',
     inject: 'body',
     minify: false,
+    chunksSortMode: 'dependency',
   }),
   new webpack.NoErrorsPlugin(),
   new CopyWebpackPlugin([
@@ -28,20 +31,42 @@ const basePlugins = [
 ].concat(sourceMap);
 
 const devPlugins = [
+  // do type checking in a separate process
+  new ForkCheckerPlugin(),
   new StyleLintPlugin({
     configFile: './.stylelintrc',
     files: 'src/**/*.css',
     failOnError: false,
   }),
+  // since polyfills are in a non-imported entry file
+  new webpack.optimize.CommonsChunkPlugin({
+    name: ['polyfills'],
+  }),
+  // extract webpack bootstrap
+  new webpack.optimize.CommonsChunkPlugin({
+    minChunks: Infinity,
+    name: 'inline',
+    filename: 'inline.js',
+    sourceMapFilename: 'inline.map',
+  }),
 ];
 
 const prodPlugins = [
-  /*
-  // TODO: Doesn't work with build now
-  new SplitByPathPlugin([
-    { name: 'vendor', path: [path.join(__dirname, '..', 'node_modules/')] },
-  ]),
-   */
+  // do type checking in a separate process
+  new ForkCheckerPlugin(),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: [
+      'vendor',
+      'polyfills',
+    ],
+  }),
+  // extract webpack bootstrap
+  new webpack.optimize.CommonsChunkPlugin({
+    minChunks: Infinity,
+    name: 'inline',
+    filename: 'inline.js',
+    sourceMapFilename: 'inline.map',
+  }),
   new webpack.optimize.DedupePlugin(),
   new webpack.optimize.UglifyJsPlugin({
     mangle: { keep_fnames: true },
