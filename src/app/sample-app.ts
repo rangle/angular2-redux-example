@@ -43,12 +43,6 @@ export class RioSampleApp {
     private actions: SessionActions,
     private epics: SessionEpics) {
 
-    const enh = (dev && devTools.isEnabled()) ?
-      [ ... enhancers, devTools.enhancer({
-        deserializeState: reimmutify,
-      }) ] :
-      enhancers;
-
     middleware.push(createEpicMiddleware(this.epics.login));
 
     ngRedux.configureStore(rootReducer, {}, middleware, enhancers);
