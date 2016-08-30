@@ -8,9 +8,7 @@ module.exports = function getWebpackConfig() {
   // request.
   return Object.keys(config).reduce((acc, path) => {
     acc[path + '*'] = config[path];
-    acc[path + '*'].rewrite = (req) => {
-      req.url = req.url.replace(path, '');
-    };
+    acc[path + '*'].pathRewrite = { [path]: '' };
 
     return acc;
   }, {});
