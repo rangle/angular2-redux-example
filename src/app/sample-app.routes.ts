@@ -1,10 +1,10 @@
-import {RouterConfig} from '@angular/router';
+import {Routes} from '@angular/router';
 import {
   RioCounterPage,
   RioAboutPage
 } from '../pages';
 
-export const SAMPLE_APP_ROUTES: RouterConfig = [{
+export const SAMPLE_APP_ROUTES: Routes = [{
   pathMatch: 'full',
   path: '',
   redirectTo: 'counter'
