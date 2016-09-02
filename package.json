@@ -125,6 +125,6 @@
     "webpack-dev-server": "^2.1.0-beta.0",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-split-by-path": "^0.1.0-beta.1",
-    "zone.js": "0.6.12"
+    "zone.js": "^0.6.17"
   }
 }
