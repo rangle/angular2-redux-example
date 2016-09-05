@@ -67,7 +67,6 @@ const prodPlugins = [
     filename: 'inline.js',
     sourceMapFilename: 'inline.map',
   }),
-  new webpack.optimize.DedupePlugin(),
   new webpack.optimize.UglifyJsPlugin({
     mangle: { keep_fnames: true },
     compress: {
