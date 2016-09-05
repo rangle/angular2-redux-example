@@ -19,6 +19,8 @@ import {
   RioLoginModal
 } from '../components';
 
+import {dev} from '../configuration';
+
 @Component({
   selector: 'rio-sample-app',
   // Allow app to define global styles.
@@ -41,7 +43,7 @@ export class RioSampleApp {
     private actions: SessionActions,
     private epics: SessionEpics) {
 
-    const enh = (__DEV__ && devTools.isEnabled()) ?
+    const enh = (dev && devTools.isEnabled()) ?
       [ ... enhancers, devTools.enhancer({
         deserializeState: reimmutify,
       }) ] :

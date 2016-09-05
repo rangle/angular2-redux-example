@@ -2,6 +2,8 @@ import { IAppState, rootReducer, deimmutify, reimmutify } from './store';
 import { ICounter } from './counter';
 import { ISession } from './session';
 
+import {dev} from '../configuration';
+
 const createLogger = require('redux-logger');
 const persistState = require('redux-localstorage');
 
@@ -24,7 +26,7 @@ export let enhancers = [
     })
 ];
 
-if (__DEV__) {
+if (dev) {
   middleware.push(
     createLogger({
     level: 'info',

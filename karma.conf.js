@@ -50,7 +50,7 @@ module.exports = (config) => {
       postcss: postcssInit,
       entry: './src/tests.entry.ts',
       devtool: 'inline-source-map',
-      verbose: false,
+      verbose: true,
       resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
       },
@@ -61,7 +61,7 @@ module.exports = (config) => {
           : [ ],
       },
       stats: { colors: true, reasons: true },
-      debug: false,
+      debug: true,
     },
 
     webpackServer: {

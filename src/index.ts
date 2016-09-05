@@ -5,13 +5,15 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {RioSampleAppModule} from './app/sample-app.module';
 import {enableProdMode} from '@angular/core';
 
-if (__PRODUCTION__) {
+import {production, test} from './configuration';
+
+if (production) {
   enableProdMode();
 } else {
   require('zone.js/dist/long-stack-trace-zone');
 }
 
-if (!__TEST__) {
+if (!test) {
   // Compile and launch the module
   platformBrowserDynamic().bootstrapModule(RioSampleAppModule);
 }
