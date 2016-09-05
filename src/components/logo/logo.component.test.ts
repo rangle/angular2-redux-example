@@ -1,22 +1,27 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioLogo} from './index';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioUiModule} from '../ui/ui.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Logo', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioUiModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioUiModule],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioLogo);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioLogo);
-    fixture.detectChanges();
   });
 
   it('should set the image location',

@@ -1,22 +1,27 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
-import { RioFormError } from './form-error';
-import {TestBed} from '@angular/core/testing/test_bed';
+import {RioFormError} from './form-error';
 import {RioFormModule} from './form.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Form Error', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioFormModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioFormModule],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioFormError);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioFormError);
-    fixture.detectChanges();
   });
 
   it('should be hidden with visible is false',

@@ -9,35 +9,36 @@ import {
   FormGroup,
   FormControl,
   FormBuilder,
+  FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import {TestBed} from '@angular/core/testing/test_bed';
+import {TestBed} from '@angular/core/testing';
 import {RioFormModule} from './form.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Form', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioFormModule,
-        ReactiveFormsModule
-      ],
-      declarations: [
-        RioFormTestController
-      ],
-      providers: [
-        RioForm
-      ]
-    });
-    fixture = TestBed.createComponent(RioFormTestController);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          RioFormModule,
+        ],
+        declarations: [
+          RioFormTestController,
+        ]
+      });
+    };
 
-  it('should inject the component', inject([RioForm],
-    (component: RioForm) => {
-      expect(component).toBeTruthy();
-    }));
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioFormTestController);
+      fixture.detectChanges();
+      done();
+    });
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {

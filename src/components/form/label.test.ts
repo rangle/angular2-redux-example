@@ -1,36 +1,34 @@
 import {
   async,
   inject,
+  TestBed,
 } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { RioLabel } from './label';
-import {TestBed} from '@angular/core/testing/test_bed';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {RioLabel} from './label';
 import {RioFormModule} from './form.module';
+import {RioSampleAppModule} from '../../app/sample-app.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Navigator', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioFormModule
-      ],
-      declarations: [
-        RioLabelTestController
-      ],
-      providers: [
-        RioLabel
-      ]
-    });
-    fixture = TestBed.createComponent(RioLabelTestController);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioFormModule],
+        declarations: [
+          RioLabelTestController
+        ],
+      });
+    };
 
-  it('should inject the component', inject([RioLabel],
-    (component: RioLabel) => {
-      expect(component).toBeTruthy();
-    }));
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioLabelTestController);
+      fixture.detectChanges();
+      done();
+    });
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {

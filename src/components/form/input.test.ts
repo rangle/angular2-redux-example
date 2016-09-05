@@ -1,25 +1,36 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import { RioInput } from './input';
 import {
-  FormControl
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioFormModule} from './form.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Form Input', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioFormModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          RioFormModule,
+        ],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioInput);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioInput);
-    fixture.detectChanges();
   });
 
   it('should render the input with the correct property values',
@@ -41,5 +52,4 @@ describe('Component: Form Input', () => {
       });
     })
   ));
-
 });

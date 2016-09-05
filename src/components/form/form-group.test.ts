@@ -1,36 +1,32 @@
 import {
   async,
   inject,
+  TestBed,
 } from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {RioFormGroup} from './form-group';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioFormModule} from './form.module';
+import {RioSampleAppModule} from '../../app/sample-app.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Navigator', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioFormModule
-      ],
-      declarations: [
-        RioFormGroupTestController
-      ],
-      providers: [
-        RioFormGroup
-      ]
-    });
-    fixture = TestBed.createComponent(RioFormGroupTestController);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioFormModule],
+        declarations: [RioFormGroupTestController],
+      });
+    };
 
-  it('should inject the component', inject([RioFormGroup],
-    (component: RioFormGroup) => {
-      expect(component).toBeTruthy();
-    }));
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioFormGroupTestController);
+      fixture.detectChanges();
+      done();
+    });
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {
@@ -41,7 +37,6 @@ describe('Component: Navigator', () => {
       expect(query.componentInstance).toBeTruthy();
     });
   })));
-
 });
 
 @Component({

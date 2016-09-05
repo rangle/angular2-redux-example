@@ -1,29 +1,28 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioLoginForm} from './index';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioLoginModule} from './login.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Login Form', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioLoginModule
-      ]
-    });
-    fixture = TestBed.createComponent(RioLoginForm);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioLoginModule],
+      });
+    };
 
-  it('should inject the component', async(inject([], () => {
-    fixture.whenStable().then(() => {
-      expect(fixture.componentInstance).toBeTruthy();
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioLoginForm);
+      fixture.detectChanges();
+      done();
     });
-  })));
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {
@@ -116,10 +115,11 @@ describe('Component: Login Form', () => {
         spyOn(fixture.componentInstance, 'reset').and.callThrough();
         let button = fixture.nativeElement.querySelector('#qa-clear-button');
         button.click();
+
         fixture.detectChanges();
         expect(fixture.componentInstance.reset).toHaveBeenCalled();
-        expect(fixture.componentInstance.username.value).toEqual('');
-        expect(fixture.componentInstance.password.value).toEqual('');
+        expect(fixture.componentInstance.username.value).toBeFalsy();
+        expect(fixture.componentInstance.password.value).toBeFalsy();
       });
     }))
   );

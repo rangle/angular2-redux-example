@@ -1,23 +1,27 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioContainer} from './container.component';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioUiModule} from '../ui/ui.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Alert', () => {
-
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioUiModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioUiModule],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioContainer);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioContainer);
-    fixture.detectChanges();
   });
 
   it('should set default size', async(inject([], () => {
@@ -89,4 +93,3 @@ describe('Component: Alert', () => {
     }));
   });
 });
-

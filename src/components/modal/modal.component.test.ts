@@ -1,36 +1,35 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {RioModal} from './modal.component';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioModalModule} from './modal.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Modal', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioModalModule
-      ],
-      declarations: [
-        RioModalTestController
-      ],
-      providers: [
-        RioModal
-      ]
-    });
-    fixture = TestBed.createComponent(RioModalTestController);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [
+          RioModalModule,
+        ],
+        declarations: [
+          RioModalTestController
+        ],
+      });
+    };
 
-  it('should inject the component', inject([RioModal],
-    (component: RioModal) => {
-      expect(component).toBeTruthy();
-    }));
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioModalTestController);
+      fixture.detectChanges();
+      done();
+    });
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {

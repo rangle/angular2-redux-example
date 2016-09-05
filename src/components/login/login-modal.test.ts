@@ -1,29 +1,28 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioLoginModal} from './index';
 import {RioLoginModule} from './login.module';
-import {TestBed} from '@angular/core/testing/test_bed';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Login Modal', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioLoginModule
-      ]
-    });
-    fixture = TestBed.createComponent(RioLoginModal);
-    fixture.detectChanges();
-  });
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioLoginModule],
+      });
+    };
 
-  it('should inject the component', async(inject([], () => {
-    fixture.whenStable().then(() => {
-      expect(fixture.componentInstance).toBeTruthy();
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioLoginModal);
+      fixture.detectChanges();
+      done();
     });
-  })));
+  });
 
   it('should create the component', async(inject([], () => {
     fixture.whenStable().then(() => {
@@ -49,5 +48,4 @@ describe('Component: Login Modal', () => {
       });
     }))
   );
-
 });

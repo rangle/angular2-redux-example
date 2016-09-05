@@ -1,23 +1,27 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioNavigatorItem} from './navigator-item.component';
-import {TestBed} from '@angular/core/testing/test_bed';
 import {RioNavigatorModule} from './navigator.module';
-
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Navigator Item', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioNavigatorModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioNavigatorModule],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioNavigatorItem);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioNavigatorItem);
-    fixture.detectChanges();
   });
 
   it('should render the button with the correct classes applied',

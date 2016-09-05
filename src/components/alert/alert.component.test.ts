@@ -1,22 +1,27 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
 import {RioAlert} from './alert.component';
-import {TestBed} from '@angular/core/testing/test_bed';
-import {RioUiModule} from '../ui/ui.module';
+import {RioUiModule} from '../../components/ui/ui.module';
+import {configureTests} from '../../tests.configure';
 
 describe('Component: Alert', () => {
   let fixture;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioUiModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [RioUiModule],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioAlert);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioAlert);
-    fixture.detectChanges();
   });
 
   it('should default to info status', async(inject([], () => {

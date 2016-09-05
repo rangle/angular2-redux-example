@@ -1,22 +1,35 @@
 import {
   async,
-  inject
+  inject,
+  TestBed,
 } from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import {RioButton} from './button.component';
-import {TestBed} from '@angular/core/testing/test_bed';
-import {RioUiModule} from '../ui/ui.module';
+import {RioUiModule} from '../../components/ui/ui.module';
+import {RioFormModule} from '../../components/form/form.module';
+import {configureTests} from '../../tests.configure';
 
 let fixture;
 
 describe('Component: Button', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RioUiModule
-      ]
+  beforeEach(done => {
+    const configure = (testBed: TestBed) => {
+      testBed.configureTestingModule({
+        imports: [
+          RioFormModule,
+          RioUiModule,
+        ],
+      });
+    };
+
+    configureTests(configure).then(testBed => {
+      fixture = testBed.createComponent(RioButton);
+      fixture.detectChanges();
+      done();
     });
-    fixture = TestBed.createComponent(RioButton);
-    fixture.detectChanges();
   });
 
   it('should invoke handleClick when button is clicked',
