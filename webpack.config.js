@@ -99,6 +99,7 @@ const baseConfig = {
       loaders.tslint,
     ],
     loaders: [
+      loaders.angular,
       loaders.ts,
       loaders.html,
       loaders.css,

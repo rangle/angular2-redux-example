@@ -10,7 +10,11 @@ import {
   routing,
   appRoutingProviders
 } from './sample-app.routing';
-import {FormBuilder} from '@angular/forms';
+import {
+  FormsModule,
+  FormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {RioSampleApp} from './sample-app';
 import {SessionActions} from '../actions/session.actions';
 import {SessionEpics} from '../epics/session.epics';
@@ -25,6 +29,8 @@ import {RioNavigatorModule} from '../components/navigator/navigator.module';
 
 @NgModule({
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     routing,
     CommonModule,

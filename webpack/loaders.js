@@ -1,5 +1,15 @@
 'use strict';
 
+exports.angular = { // ships in ES6 format now
+  test: /\.js$/,
+  loader: 'babel-loader',
+  include: /angular/,
+  exclude: /node_modules/,
+  query: {
+    compact: false,
+  },
+};
+
 exports.tslint = {
   test: /\.ts$/,
   loader: 'tslint',

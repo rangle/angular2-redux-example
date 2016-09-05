@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { IPayloadAction, SessionActions } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
@@ -15,7 +15,7 @@ export class SessionEpics {
 
   login = (action$: Observable<IPayloadAction>) => {
     return action$.filter(({ type }) => type === SessionActions.LOGIN_USER)
-      .flatMap(({ payload }) => {
+      .mergeMap<IPayloadAction>(({ payload }) => {
         return this.http.post(`${BASE_URL}/auth/login`, payload)
           .map(result => ({
             type: SessionActions.LOGIN_USER_SUCCESS,
