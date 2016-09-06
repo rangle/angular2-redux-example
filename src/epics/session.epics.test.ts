@@ -1,5 +1,5 @@
 import {
-  async,
+  fakeAsync,
   inject,
   TestBed,
 } from '@angular/core/testing';
@@ -39,7 +39,7 @@ describe('SessionEpics', () => {
 
   it(
     'should process a successful login',
-    async(
+    fakeAsync(
       inject([
         XHRBackend,
         SessionEpics
@@ -80,7 +80,7 @@ describe('SessionEpics', () => {
 
   it(
     'should process a login error',
-    async(inject([
+    fakeAsync(inject([
       XHRBackend,
       SessionEpics
     ], (mockBackend, sessionEpics) => {
