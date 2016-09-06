@@ -12,7 +12,7 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Modal', () => {
   let fixture;
 
-  beforeEach(done => {
+  beforeEach(() => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [
@@ -24,10 +24,9 @@ describe('Component: Modal', () => {
       });
     };
 
-    configureTests(configure).then(testBed => {
+    return configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioModalTestController);
       fixture.detectChanges();
-      done();
     });
   });
 

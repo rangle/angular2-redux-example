@@ -19,7 +19,7 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Form', () => {
   let fixture;
 
-  beforeEach(done => {
+  beforeEach(() => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [
@@ -33,10 +33,9 @@ describe('Component: Form', () => {
       });
     };
 
-    configureTests(configure).then(testBed => {
+    return configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioFormTestController);
       fixture.detectChanges();
-      done();
     });
   });
 

@@ -10,17 +10,16 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Logo', () => {
   let fixture;
 
-  beforeEach(done => {
+  beforeEach(() => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioUiModule],
       });
     };
 
-    configureTests(configure).then(testBed => {
+    return configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioLogo);
       fixture.detectChanges();
-      done();
     });
   });
 

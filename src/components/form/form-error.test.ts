@@ -10,17 +10,16 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Form Error', () => {
   let fixture;
 
-  beforeEach(done => {
+  beforeEach(() => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioFormModule],
       });
     };
 
-    configureTests(configure).then(testBed => {
+    return configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioFormError);
       fixture.detectChanges();
-      done();
     });
   });
 

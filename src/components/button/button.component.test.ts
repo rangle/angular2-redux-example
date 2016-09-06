@@ -15,7 +15,7 @@ import {configureTests} from '../../tests.configure';
 let fixture;
 
 describe('Component: Button', () => {
-  beforeEach(done => {
+  beforeEach(() => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [
@@ -25,10 +25,9 @@ describe('Component: Button', () => {
       });
     };
 
-    configureTests(configure).then(testBed => {
+    return configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioButton);
       fixture.detectChanges();
-      done();
     });
   });
 
