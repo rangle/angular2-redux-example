@@ -10,7 +10,7 @@ import {
   FormControl,
   FormBuilder,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from '@angular/forms';
 import {TestBed} from '@angular/core/testing';
 import {RioFormModule} from './form.module';

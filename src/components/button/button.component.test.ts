@@ -3,10 +3,7 @@ import {
   inject,
   TestBed,
 } from '@angular/core/testing';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+
 import {RioButton} from './button.component';
 import {RioUiModule} from '../../components/ui/ui.module';
 import {RioFormModule} from '../../components/form/form.module';

@@ -3,12 +3,8 @@ import {
   inject,
   TestBed,
 } from '@angular/core/testing';
-import { RioInput } from './input';
-import {
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import {RioInput} from './input';
+import {FormControl} from '@angular/forms';
 import {RioFormModule} from './form.module';
 import {configureTests} from '../../tests.configure';
 
@@ -19,8 +15,6 @@ describe('Component: Form Input', () => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [
-          FormsModule,
-          ReactiveFormsModule,
           RioFormModule,
         ],
       });
