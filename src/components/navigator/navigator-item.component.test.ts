@@ -10,16 +10,17 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Navigator Item', () => {
   let fixture;
 
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioNavigatorModule],
       });
     };
 
-    return configureTests(configure).then(testBed => {
+    configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioNavigatorItem);
       fixture.detectChanges();
+      done();
     });
   });
 

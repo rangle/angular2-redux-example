@@ -20,7 +20,7 @@ import {
 import {configureTests} from '../tests.configure';
 
 describe('SessionEpics', () => {
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [HttpModule],
@@ -34,7 +34,7 @@ describe('SessionEpics', () => {
       });
     };
 
-    return configureTests(configure);
+    configureTests(configure).then(done);
   });
 
   it(

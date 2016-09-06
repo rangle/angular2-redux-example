@@ -10,16 +10,17 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Alert', () => {
   let fixture;
 
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioUiModule],
       });
     };
 
-    return configureTests(configure).then(testBed => {
+    configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioContainer);
       fixture.detectChanges();
+      done();
     });
   });
 

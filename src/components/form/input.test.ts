@@ -15,7 +15,7 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Form Input', () => {
   let fixture;
 
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [
@@ -26,9 +26,10 @@ describe('Component: Form Input', () => {
       });
     };
 
-    return configureTests(configure).then(testBed => {
+    configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioInput);
       fixture.detectChanges();
+      done();
     });
   });
 

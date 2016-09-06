@@ -13,7 +13,7 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Navigator', () => {
   let fixture;
 
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioFormModule],
@@ -21,9 +21,10 @@ describe('Component: Navigator', () => {
       });
     };
 
-    return configureTests(configure).then(testBed => {
+    configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioFormGroupTestController);
       fixture.detectChanges();
+      done();
     });
   });
 

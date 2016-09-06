@@ -10,16 +10,17 @@ import {configureTests} from '../../tests.configure';
 describe('Component: Login Form', () => {
   let fixture;
 
-  beforeEach(() => {
+  beforeEach(done => {
     const configure = (testBed: TestBed) => {
       testBed.configureTestingModule({
         imports: [RioLoginModule],
       });
     };
 
-    return configureTests(configure).then(testBed => {
+    configureTests(configure).then(testBed => {
       fixture = testBed.createComponent(RioLoginForm);
       fixture.detectChanges();
+      done();
     });
   });
 
