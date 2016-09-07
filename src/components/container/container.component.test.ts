@@ -7,7 +7,7 @@ import {RioContainer} from './container.component';
 import {RioUiModule} from '../ui/ui.module';
 import {configureTests} from '../../tests.configure';
 
-describe('Component: Alert', () => {
+describe('Component: Container', () => {
   let fixture;
 
   beforeEach(done => {

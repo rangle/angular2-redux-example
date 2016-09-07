@@ -10,7 +10,7 @@ import {RioFormModule} from './form.module';
 import {RioSampleAppModule} from '../../app/sample-app.module';
 import {configureTests} from '../../tests.configure';
 
-describe('Component: Navigator', () => {
+describe('Component: Form Group', () => {
   let fixture;
 
   beforeEach(done => {
