@@ -1,6 +1,6 @@
 [![Circle CI](https://circleci.com/gh/rangle/angular2-redux-example.svg?style=svg)](https://circleci.com/gh/rangle/angular2-redux-starter)
 
-# Angular 2/TypeScript/Redux/Webpack Example APp
+# Angular 2/TypeScript/Redux/Webpack Example App
 
 This is an example app built with Angular 2, Redux, and webpack. We use it 
 internally as a teaching tool and platform for trying out architectural ideas.
