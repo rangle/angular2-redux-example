@@ -36,6 +36,8 @@ const basePlugins = [
       postcss,
     },
   }),
+  new webpack.ContextReplacementPlugin(
+    /angular\/core\/(esm\/src|src)\/linker/, __dirname),
 ].concat(sourceMap);
 
 const devPlugins = [
