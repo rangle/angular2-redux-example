@@ -84,6 +84,7 @@ module.exports = (config) => {
       reports: {
         html: 'coverage',
       },
+      timeoutNotCreated: 5000,
     },
 
     port: 9999,
