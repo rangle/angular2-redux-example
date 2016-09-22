@@ -11,6 +11,7 @@ exports.angular = { // ships in ES6 format now
 };
 
 exports.tslint = {
+  enforce: 'pre',
   test: /\.ts$/,
   loader: 'tslint',
   exclude: /node_modules/,
@@ -27,6 +28,7 @@ exports.ts = {
 };
 
 exports.istanbulInstrumenter = {
+  enforce: 'post',
   test: /^(.(?!\.test))*\.ts$/,
   loader: 'istanbul-instrumenter-loader',
 };

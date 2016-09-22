@@ -4,7 +4,6 @@ const path = require('path');
 const proxy = require('./server/webpack-dev-proxy');
 const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
-const postcssInit = require('./webpack/postcss');
 
 /*
  * Dev Config
@@ -85,9 +84,11 @@ const prodConfig = {
 };
 
 const baseConfig = {
-  resolve: { extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'] },
+  resolve: {
+    extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
+  },
+
   plugins: plugins,
-  postcss: postcssInit,
 
   devServer: {
     historyApiFallback: { index: '/' },
@@ -95,10 +96,8 @@ const baseConfig = {
   },
 
   module: {
-    preLoaders: [
+    rules: [
       loaders.tslint,
-    ],
-    loaders: [
       loaders.angular,
       loaders.ts,
       loaders.html,
