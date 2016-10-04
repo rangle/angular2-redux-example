@@ -23,13 +23,12 @@
     "lint-css": "stylelint './src/**/*.css'",
     "lint-ts": "tslint './src/**/*.ts'",
     "lint-js": "eslint '**/*.js' --ignore-path .gitignore",
-    "postinstall": "npm run typings && npm run build",
+    "postinstall": "npm run build",
     "start": "cross-env NODE_ENV=production node server/node-server.js",
     "pretest": "rimraf coverage/ & npm run lint",
     "test": "karma start --singleRun true",
     "posttest": "npm run cover",
-    "test:watch": "karma start --singleRun false",
-    "typings": "rimraf typings/ && typings install"
+    "test:watch": "karma start --singleRun false"
   },
   "repository": {
     "type": "git",
@@ -53,6 +52,9 @@
     "@angular/platform-browser": "2.0.0",
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "^3.0.0-rc.2",
+    "@types/assertion-error": "^1.0.30",
+    "@types/jasmine": "^2.2.34",
+    "@types/node": "^6.0.42",
     "autoprefixer": "^6.3.3",
     "autoprefixer-core": "^6.0.1",
     "awesome-typescript-loader": "^2.2.1",
@@ -121,7 +123,6 @@
     "tslint-loader": "^2.1.0",
     "typed-immutable-record": "0.0.3",
     "typescript": "^2.0.0",
-    "typings": "^1.0.4",
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "2.1.0-beta.5",
     "webpack-hot-middleware": "2.12.2",

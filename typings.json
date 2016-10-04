@@ -1,7 +1,0 @@
-{
-  "globalDependencies": {
-    "assertion-error": "registry:dt/assertion-error#1.0.0+20160316155526",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160709114037"
-  }
-}
