@@ -1,19 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import {
   FormBuilder,
   FormGroup,
   FormControl,
+  NgForm,
   Validators
 } from '@angular/forms';
 
 @Component({
   selector: 'rio-login-form',
   template: `
-    <rio-form
-      [group]="group"
-      (onSubmit)="handleSubmit()">
-      <rio-alert 
+    <form (ngSubmit)="handleSubmit()">
+      <rio-alert
         qaid="qa-pending"
         testid="alert-pending"
         status='info'
@@ -29,13 +34,17 @@ import {
         testid="login-username">
         <rio-label qaid="qa-uname-label">Username</rio-label>
         <rio-input
+          required
+          name="username"
           qaid="qa-uname-input"
           inputType='text'
           placeholder='Username'
-          [control]="username"></rio-input>
+          ngControl
+          [(ngModel)]="username"
+          #usernameModel="ngControl"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
-          [visible]="showNameWarning()">
+          [visible]="usernameModel.touched && !usernameModel.valid">
           Username is required.
         </rio-form-error>
       </rio-form-group>
@@ -44,13 +53,17 @@ import {
         testid="login-password">
         <rio-label qaid="qa-password-label">Password</rio-label>
         <rio-input
+          required
+          name="password"
           qaid="qa-password-input"
           inputType='password'
           placeholder='Password'
-          [control]="password"></rio-input>
+          ngControl
+          [(ngModel)]="password"
+          #passwordModel="ngControl"></rio-input>
         <rio-form-error
           qaid="qa-password-validation"
-          [visible]="showPasswordWarning()">
+          [visible]="passwordModel.touched && !passwordModel.valid">
           Password is required.
         </rio-form-error>
       </rio-form-group>
@@ -71,7 +84,7 @@ import {
           Clear
         </rio-button>
       </rio-form-group>
-    </rio-form>
+    </form>
   `
 })
 export class RioLoginForm {
@@ -79,44 +92,21 @@ export class RioLoginForm {
   @Input() hasError: boolean;
   @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
 
-  // needed to be public to allow access from fixture tests
-  username: FormControl;
-  password: FormControl;
-  group: FormGroup;
+  @ViewChild(NgForm) form: NgForm;
 
-  constructor(private builder: FormBuilder) {
+  username: string;
+  password: string;
+
+  constructor() {
     this.reset();
   }
 
-  showNameWarning() {
-    return this.username.touched
-      && !this.username.valid
-      && this.username.hasError('required');
-  }
-
-  showPasswordWarning() {
-    return this.password.touched
-      && !this.password.valid
-      && this.password.hasError('required');
-  }
-
   handleSubmit() {
-    this.password.markAsTouched();
-    this.username.markAsTouched();
-
-    if (this.password.value && this.username.value) {
-      this.onSubmit.emit(this.group.value);
-    }
+    this.onSubmit.emit(this.form.value);
   }
 
   reset() {
-    this.username = new FormControl('', Validators.required);
-    this.password = new FormControl('', Validators.required);
-    this.hasError = false;
-    this.isPending = false;
-    this.group = this.builder.group({
-      username: this.username,
-      password: this.password
-    });
+    this.username = '';
+    this.password = '';
   }
 };

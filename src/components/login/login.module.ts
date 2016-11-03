@@ -2,6 +2,7 @@ import {NgModule}      from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpModule} from '@angular/http';
 import {
+  FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
 import {
@@ -14,6 +15,7 @@ import {RioFormModule} from '../form/form.module';
 
 @NgModule({
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     CommonModule,
     HttpModule,
