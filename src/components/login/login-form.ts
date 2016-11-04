@@ -39,12 +39,12 @@ import {
           qaid="qa-uname-input"
           inputType='text'
           placeholder='Username'
-          ngControl
           [(ngModel)]="username"
-          #usernameModel="ngControl"></rio-input>
+          #usernameModel="ngModel"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
-          [visible]="usernameModel.touched && !usernameModel.valid">
+          [visible]="
+            usernameModel.control.touched && !usernameModel.control.valid">
           Username is required.
         </rio-form-error>
       </rio-form-group>
@@ -58,12 +58,12 @@ import {
           qaid="qa-password-input"
           inputType='password'
           placeholder='Password'
-          ngControl
           [(ngModel)]="password"
-          #passwordModel="ngControl"></rio-input>
+          #passwordModel="ngModel"></rio-input>
         <rio-form-error
           qaid="qa-password-validation"
-          [visible]="passwordModel.touched && !passwordModel.valid">
+          [visible]="
+            passwordModel.control.touched && !passwordModel.control.valid">
           Password is required.
         </rio-form-error>
       </rio-form-group>
