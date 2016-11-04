@@ -64,7 +64,7 @@ describe('Component: Login Form', () => {
   it('should display name warning for invalid username',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        fixture.componentInstance.username.setValue('');
+        fixture.componentInstance.username = '';
         fixture.autoDetectChanges();
         let alert = fixture.nativeElement.querySelector('#qa-uname-validation');
         expect(alert).not.toBeNull();
@@ -76,7 +76,7 @@ describe('Component: Login Form', () => {
   it('should display password warning for invalid password',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        fixture.componentInstance.password.setValue('');
+        fixture.componentInstance.password = '';
         fixture.autoDetectChanges();
         let alert = fixture.nativeElement
           .querySelector('#qa-password-validation');
@@ -89,8 +89,8 @@ describe('Component: Login Form', () => {
   it('should emit an event when the login button is clicked',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        fixture.componentInstance.username.setValue('user');
-        fixture.componentInstance.password.setValue('pass');
+        fixture.componentInstance.username = 'user';
+        fixture.componentInstance.password = 'pass';
         fixture.autoDetectChanges();
         fixture.componentInstance.onSubmit.subscribe(data => {
           expect(data).toBeDefined();
@@ -106,8 +106,8 @@ describe('Component: Login Form', () => {
   it('should call reset when the clear button is clicked',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        fixture.componentInstance.username.setValue('user');
-        fixture.componentInstance.password.setValue('pass');
+        fixture.componentInstance.username = 'user';
+        fixture.componentInstance.password = 'pass';
         fixture.detectChanges();
         expect(fixture.componentInstance.username.value).toEqual('user');
         expect(fixture.componentInstance.password.value).toEqual('pass');
