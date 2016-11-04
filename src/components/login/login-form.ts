@@ -17,7 +17,7 @@ import {
 @Component({
   selector: 'rio-login-form',
   template: `
-    <form (ngSubmit)="handleSubmit()">
+    <form (ngSubmit)="handleSubmit()" #form="ngForm">
       <rio-alert
         qaid="qa-pending"
         testid="alert-pending"
