@@ -32,11 +32,11 @@ describe('Component: Form Error', () => {
         fixture.componentInstance.visible = false;
         fixture.detectChanges();
         expect(compiled.querySelector('div').getAttribute('class')
-          .split(' ')).toContain('display-none');
+          .split(' ')).toContain('hide');
         fixture.componentInstance.visible = true;
         fixture.detectChanges();
         expect(compiled.querySelector('div').getAttribute('class')
-          .split(' ')).not.toContain('display-none');
+          .split(' ')).not.toContain('hide');
       });
     }))
   );
