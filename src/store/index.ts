@@ -2,8 +2,7 @@ import { IAppState, rootReducer, deimmutify, reimmutify } from './store';
 import { ICounter } from './counter';
 import { ISession } from './session';
 
-import {dev} from '../configuration';
-
+import { dev } from '../configuration';
 const createLogger = require('redux-logger');
 const persistState = require('redux-localstorage');
 
@@ -33,9 +32,4 @@ if (dev) {
     collapsed: true,
     stateTransformer: deimmutify,
   }));
-
-  const environment: any = window || this;
-  if (environment.devToolsExtension) {
-    enhancers.push(environment.devToolsExtension());
-  }
 }

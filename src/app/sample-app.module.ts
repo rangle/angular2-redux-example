@@ -2,8 +2,9 @@ import {NgModule}      from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {
+  NgRedux,
+  NgReduxModule,
   DevToolsExtension,
-  NgRedux
 } from 'ng2-redux';
 import {NgReduxRouter} from 'ng2-redux-router';
 import {
@@ -36,7 +37,8 @@ import {RioNavigatorModule} from '../components/navigator/navigator.module';
     CommonModule,
     RioLoginModule,
     RioUiModule,
-    RioNavigatorModule
+    RioNavigatorModule,
+    NgReduxModule.forRoot(),
   ],
   declarations: [
     RioSampleApp,
@@ -50,7 +52,6 @@ import {RioNavigatorModule} from '../components/navigator/navigator.module';
   providers: [
     DevToolsExtension,
     FormBuilder,
-    NgRedux,
     NgReduxRouter,
     appRoutingProviders,
     SessionActions,
