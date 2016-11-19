@@ -1,7 +1,6 @@
 import {
   AbstractControl,
   AsyncValidatorFn,
-  FormControl,
   Validator,
   Validators,
   ValidatorFn,
@@ -9,60 +8,46 @@ import {
 
 import { Observable } from 'rxjs';
 
-type AsyncValidator = Validator | AsyncValidatorFn;
+export type AsyncValidatorArray = Array<Validator | AsyncValidatorFn>;
 
-type SyncValidator = Validator | ValidatorFn;
+export type ValidatorArray = Array<Validator | ValidatorFn>;
 
-type AsyncValidatorArray = Array<AsyncValidator>;
-
-type ValidatorArray = Array<SyncValidator>;
-
-const normalizeValidator = (validator: SyncValidator): ValidatorFn => {
-  if (typeof (<Validator> validator).validate === 'function') {
-    return (c: AbstractControl) => (<Validator> validator).validate(c);
+const normalizeValidator = (validator: Validator | ValidatorFn): ValidatorFn | AsyncValidatorFn => {
+  const func = (validator as Validator).validate.bind(validator);
+  if (typeof func === 'function') {
+    return (c: AbstractControl) => func(c);
   } else {
-    return <ValidatorFn> validator;
+    return <ValidatorFn | AsyncValidatorFn> validator;
   }
 };
 
-const normalizeAsyncValidator =
-    (validator: AsyncValidator): AsyncValidatorFn => {
-  if (typeof (<Validator> validator).validate === 'function') {
-    return (c: AbstractControl) => (<Validator> validator).validate(c);
-  } else {
-    return <AsyncValidatorFn> validator;
-  }
-};
-
-export const composeValidators = (validators: ValidatorArray): ValidatorFn => {
+export const composeValidators = (validators: ValidatorArray): AsyncValidatorFn | ValidatorFn => {
   if (validators == null || validators.length === 0) {
     return null;
   }
   return Validators.compose(validators.map(normalizeValidator));
 };
 
-export const composeAsyncValidators =
-    (validators: AsyncValidatorArray): AsyncValidatorFn => {
-  if (validators == null || validators.length === 0) {
-    return null;
-  }
-  return Validators.composeAsync(validators.map(normalizeAsyncValidator));
-};
-
 export const validate =
     (validators: ValidatorArray, asyncValidators: AsyncValidatorArray) => {
-  return (control: FormControl) => {
-    const asyncValidator = composeAsyncValidators(asyncValidators);
-    if (asyncValidator) {
-      return asyncValidator(control);
+  return (control: AbstractControl) => {
+    const synchronousValid = () => composeValidators(validators)(control);
+
+    if (asyncValidators) {
+      const asyncValidator = composeValidators(asyncValidators);
+
+      return asyncValidator(control).map(v => {
+        const s = synchronousValid(); // both validator styles
+        if (s || v) {
+          return Object.assign({}, s, v);
+        }
+      });
     }
 
-    const validator = composeValidators(validators);
-    if (validator) {
-      return Observable.of(validator(control));
+    if (validators) {
+      return Observable.of(synchronousValid());
     }
 
     return Observable.of(null);
   };
 };
-
