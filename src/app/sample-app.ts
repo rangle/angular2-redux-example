@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { DevToolsExtension, NgRedux, select } from 'ng2-redux';
 import { NgReduxRouter } from 'ng2-redux-router';
 import { createEpicMiddleware } from 'redux-observable';
+import { createEpics } from 'redux-observable-decorator';
 
 import { IAppState, ISession, rootReducer } from '../store';
 import { SessionActions } from '../actions/session.actions';
@@ -43,12 +44,13 @@ export class RioSampleApp {
     private actions: SessionActions,
     private epics: SessionEpics) {
 
-    middleware.push(createEpicMiddleware(this.epics.login));
+   // middleware.push(createEpicMiddleware(this.epics.login));
+   
 
     ngRedux.configureStore(
       rootReducer,
       {},
-      middleware, 
+      [...middleware, createEpics<any>(epics)], 
       devTools.isEnabled() ?
         [ ...enhancers, devTools.enhancer() ] :
         enhancers);
