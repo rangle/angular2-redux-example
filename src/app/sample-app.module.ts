@@ -2,7 +2,6 @@ import {NgModule}      from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {
-  NgRedux,
   NgReduxModule,
   DevToolsExtension,
 } from 'ng2-redux';

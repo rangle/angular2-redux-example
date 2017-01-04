@@ -1,25 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
-import { DevToolsExtension, NgRedux, select } from 'ng2-redux';
-import { NgReduxRouter } from 'ng2-redux-router';
-import { createEpicMiddleware } from 'redux-observable';
-
-import { IAppState, ISession, rootReducer } from '../store';
-import { SessionActions } from '../actions/session.actions';
-import { SessionEpics } from '../epics/session.epics';
-import { RioAboutPage, RioCounterPage } from '../pages';
-import { middleware, enhancers, reimmutify } from '../store';
-
 import {
-  RioButton,
-  RioNavigator,
-  RioNavigatorItem,
-  RioLogo,
-  RioLoginModal
-} from '../components';
-
-import {dev} from '../configuration';
+  Component,
+  ViewEncapsulation
+} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {
+  DevToolsExtension,
+  NgRedux,
+  select
+} from 'ng2-redux';
+import {NgReduxRouter} from 'ng2-redux-router';
+import {createEpicMiddleware} from 'redux-observable';
+import {
+  IAppState,
+  rootReducer,
+  middleware,
+  enhancers
+} from '../store';
+import {SessionActions} from '../actions/session.actions';
+import {SessionEpics} from '../epics/session.epics';
 
 @Component({
   selector: 'rio-sample-app',

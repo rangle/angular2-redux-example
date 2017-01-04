@@ -9,6 +9,7 @@ module.exports = (config) => {
   const coverage = config.singleRun ? ['coverage'] : [];
 
   config.set({
+    mime: { 'text/x-typescript': ['ts', 'tsx'] },
     frameworks: [
       'jasmine',
     ],
