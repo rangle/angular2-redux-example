@@ -1,23 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+} from '@angular/core';
+
+import { NgModel } from '@angular/forms';
+
+export interface LoginForm {
+  username: string;
+  password: string;
+}
 
 @Component({
   selector: 'rio-login-form',
   template: `
-    <rio-form
-      [group]="group"
-      (onSubmit)="handleSubmit()">
-      <rio-alert 
+    <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
+      <rio-alert
         qaid="qa-pending"
         testid="alert-pending"
         status='info'
         *ngIf="isPending">Loading...</rio-alert>
+
       <rio-alert
         qaid="qa-alert"
         testid="alert-error"
@@ -29,13 +36,17 @@ import {
         testid="login-username">
         <rio-label qaid="qa-uname-label">Username</rio-label>
         <rio-input
+          required
+          name="username"
           qaid="qa-uname-input"
           inputType='text'
           placeholder='Username'
-          [control]="username"></rio-input>
+          [(ngModel)]="username"
+          #usernameModel="ngModel"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
-          [visible]="showNameWarning()">
+          [visible]="
+            usernameModel.control.touched && !usernameModel.control.valid">
           Username is required.
         </rio-form-error>
       </rio-form-group>
@@ -44,13 +55,17 @@ import {
         testid="login-password">
         <rio-label qaid="qa-password-label">Password</rio-label>
         <rio-input
+          required
+          name="password"
           qaid="qa-password-input"
           inputType='password'
           placeholder='Password'
-          [control]="password"></rio-input>
+          [(ngModel)]="password"
+          #passwordModel="ngModel"></rio-input>
         <rio-form-error
           qaid="qa-password-validation"
-          [visible]="showPasswordWarning()">
+          [visible]="
+            passwordModel.control.touched && !passwordModel.control.valid">
           Password is required.
         </rio-form-error>
       </rio-form-group>
@@ -60,63 +75,45 @@ import {
         <rio-button
           qaid="qa-login-button"
           className="mr1"
-          type="submit">
+          type="submit"
+          [disabled]="form.invalid">
           Login
         </rio-button>
         <rio-button
           qaid="qa-clear-button"
           className="bg-red"
           type="reset"
-          (onClick)="reset()">
+          (click)="onReset()">
           Clear
         </rio-button>
       </rio-form-group>
-    </rio-form>
+    </form>
   `
 })
 export class RioLoginForm {
   @Input() isPending: boolean;
+
   @Input() hasError: boolean;
-  @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
 
-  // needed to be public to allow access from fixture tests
-  username: FormControl;
-  password: FormControl;
-  group: FormGroup;
+  @Output() login = new EventEmitter<LoginForm>();
 
-  constructor(private builder: FormBuilder) {
-    this.reset();
-  }
+  @ViewChildren(NgModel) models: QueryList<NgModel>;
 
-  showNameWarning() {
-    return this.username.touched
-      && !this.username.valid
-      && this.username.hasError('required');
-  }
+  username: string;
+  password: string;
 
-  showPasswordWarning() {
-    return this.password.touched
-      && !this.password.valid
-      && this.password.hasError('required');
-  }
+  onReset() {
+    this.username = '';
+    this.password = '';
 
-  handleSubmit() {
-    this.password.markAsTouched();
-    this.username.markAsTouched();
-
-    if (this.password.value && this.username.value) {
-      this.onSubmit.emit(this.group.value);
+    if (this.models) {
+      this.models.forEach(m => m.control.markAsUntouched());
     }
   }
 
-  reset() {
-    this.username = new FormControl('', Validators.required);
-    this.password = new FormControl('', Validators.required);
-    this.hasError = false;
-    this.isPending = false;
-    this.group = this.builder.group({
-      username: this.username,
-      password: this.password
-    });
+  onSubmit(value) {
+    this.models.forEach(m => m.control.markAsTouched());
+
+    this.login.emit(value);
   }
-};
+}

@@ -1,10 +1,14 @@
 <div>
-  <rio-login-modal
-    (onSubmit)="actions.loginUser($event)"
-    [hasError]="hasError$ | async"
-    [isPending]="isLoading$ | async"
-    *ngIf="loggedOut$ | async">
-  </rio-login-modal>
+  <rio-modal *ngIf="loggedOut$ | async">
+    <rio-modal-content>
+      <h1 class="mt0">Login</h1>
+      <rio-login-form
+        [isPending]="isLoading$ | async"
+        [hasError]="hasError$ | async"
+        (login)="actions.loginUser($event)">
+      </rio-login-form>
+    </rio-modal-content>
+  </rio-modal>
   <rio-navigator testid="navigator">
     <rio-navigator-item [mr]=true>
       <rio-logo></rio-logo>

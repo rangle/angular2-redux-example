@@ -8,7 +8,7 @@ import {ICounter} from '../store';
   selector: 'counter-page',
   providers: [ CounterActions ],
   template: `
-    <rio-container testid="counter" [size]=2 [center]=true>
+    <rio-container testid="counter" [size]="2" [center]="true">
       <h2 data-testid="counter-heading" id="qa-counter-heading"
         class="center caps">
         Counter
@@ -24,5 +24,6 @@ import {ICounter} from '../store';
 })
 export class RioCounterPage {
   @select() private counter$: Observable<ICounter>;
+
   constructor(private actions: CounterActions) {}
 }

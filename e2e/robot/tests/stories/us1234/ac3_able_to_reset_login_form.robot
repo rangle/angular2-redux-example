@@ -40,7 +40,7 @@ ${BROWSER}    Chrome
     #hasError is not being reset to default value of TRUE
     Login    someusername    somepassword
     Click Login Reset Button
-    Verify Login Error Exists    ${FALSE}
+    Verify Login Error Exists    ${TRUE}
 
 *** Keywords ***
 TEST SETUP

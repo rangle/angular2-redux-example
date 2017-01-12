@@ -4,10 +4,10 @@ import { Component, Input } from '@angular/core';
   selector: 'rio-form-error',
   template: `
     <div
-      [id]="qaid"
-      [attr.data-testid]="testid"
-      class="bold black"
-      [ngClass]="{ 'display-none': !visible }">
+        class="bold black"
+        [id]="qaid"
+        [attr.data-testid]="testid"
+        [ngClass]="{hide: !visible}">
       <ng-content></ng-content>
     </div>
   `
@@ -16,4 +16,4 @@ export class RioFormError {
   @Input() visible: boolean;
   @Input() qaid: string;
   @Input() testid: string = 'form-error';
-};
+}

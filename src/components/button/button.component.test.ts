@@ -29,27 +29,26 @@ describe('Component: Button', () => {
     });
   });
 
-  it('should invoke handleClick when button is clicked',
+  it('should invoke onClick when button is clicked',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        spyOn(fixture.componentInstance, 'handleClick');
+        spyOn(fixture.componentInstance, 'onClick');
         fixture.componentInstance.qaid = 'button-1';
         fixture.detectChanges();
         let compiled = fixture.debugElement.nativeElement;
         compiled.querySelector('#button-1').click();
-        expect(fixture.componentInstance.handleClick).toHaveBeenCalled();
+        expect(fixture.componentInstance.onClick).toHaveBeenCalled();
       });
     }))
   );
 
-  it('should emit event when handleClick is invoked',
+  it('should emit event when click is invoked',
     async(inject([], () => {
       fixture.whenStable().then(() => {
-        fixture.componentInstance.onClick.subscribe(c => {
-          expect(c.data).toEqual('test data');
+        fixture.componentInstance.click.subscribe(e => {
+          expect(typeof e.stopPropagation).toEqual('function');
         });
-        let testEvent = { data: 'test data' };
-        fixture.componentInstance.handleClick(testEvent);
+        fixture.componentInstance.onClick({stopPropagation: () => {}});
       });
     }))
   );
