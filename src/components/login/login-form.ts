@@ -4,25 +4,27 @@ import {
   Input,
   Output,
   ViewChild,
+  ViewChildren,
+  QueryList,
 } from '@angular/core';
 
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  NgForm,
-  Validators
-} from '@angular/forms';
+import { NgModel } from '@angular/forms';
+
+export interface LoginForm {
+  username: string;
+  password: string;
+}
 
 @Component({
   selector: 'rio-login-form',
   template: `
-    <form (ngSubmit)="handleSubmit()" #form="ngForm">
+    <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
       <rio-alert
         qaid="qa-pending"
         testid="alert-pending"
         status='info'
         *ngIf="isPending">Loading...</rio-alert>
+
       <rio-alert
         qaid="qa-alert"
         testid="alert-error"
@@ -73,14 +75,15 @@ import {
         <rio-button
           qaid="qa-login-button"
           className="mr1"
-          type="submit">
+          type="submit"
+          [disabled]="form.invalid">
           Login
         </rio-button>
         <rio-button
           qaid="qa-clear-button"
           className="bg-red"
           type="reset"
-          (onClick)="reset()">
+          (click)="onReset()">
           Clear
         </rio-button>
       </rio-form-group>
@@ -89,24 +92,33 @@ import {
 })
 export class RioLoginForm {
   @Input() isPending: boolean;
-  @Input() hasError: boolean;
-  @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
 
-  @ViewChild(NgForm) form: NgForm;
+  @Input() hasError: boolean;
+
+  @Output() login = new EventEmitter<LoginForm>();
+
+  // Reset login state
+  @Output() reset = new EventEmitter<void>();
+
+  @ViewChildren(NgModel) models: QueryList<NgModel>;
 
   username: string;
   password: string;
 
-  constructor() {
-    this.reset();
-  }
-
-  handleSubmit() {
-    this.onSubmit.emit(this.form.value);
-  }
-
-  reset() {
+  onReset() {
     this.username = '';
     this.password = '';
+
+    if (this.models) {
+      this.models.forEach(m => m.control.markAsUntouched());
+    }
+
+    this.reset.emit(void 0);
   }
-};
+
+  onSubmit(value) {
+    this.models.forEach(m => m.control.markAsTouched());
+
+    this.login.emit(value);
+  }
+}

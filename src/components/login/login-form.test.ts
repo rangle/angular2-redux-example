@@ -41,7 +41,7 @@ describe('Component: Login Form', () => {
         .toContain('hide');
       expect(element.querySelector('#qa-login-button')).not.toBeNull();
       expect(element.querySelector('#qa-clear-button')).not.toBeNull();
-      expect(fixture.componentInstance.onSubmit).toBeTruthy();
+      expect(fixture.componentInstance.login).toBeTruthy();
     });
   })));
 
@@ -104,7 +104,7 @@ describe('Component: Login Form', () => {
         const button = fixture.nativeElement.querySelector('#qa-login-button');
         button.click();
 
-        fixture.componentInstance.onSubmit.subscribe(data => {
+        fixture.componentInstance.login.subscribe(data => {
           expect(data).toBeDefined();
           expect(data.username).toEqual('user');
           expect(data.password).toEqual('pass');
@@ -124,14 +124,14 @@ describe('Component: Login Form', () => {
         expect(fixture.componentInstance.username).toEqual('user');
         expect(fixture.componentInstance.password).toEqual('pass');
 
-        spyOn(fixture.componentInstance, 'reset').and.callThrough();
+        spyOn(fixture.componentInstance, 'onReset').and.callThrough();
         const button = fixture.nativeElement.querySelector('#qa-clear-button');
         button.click();
 
         fixture.detectChanges();
         tick();
 
-        expect(fixture.componentInstance.reset).toHaveBeenCalled();
+        expect(fixture.componentInstance.onReset).toHaveBeenCalled();
         expect(fixture.componentInstance.username).toBeFalsy();
         expect(fixture.componentInstance.password).toBeFalsy();
       });

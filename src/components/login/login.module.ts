@@ -1,14 +1,12 @@
-import {NgModule}      from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpModule} from '@angular/http';
 import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import {
-  RioLoginForm,
-  RioLoginModal
-} from '../index';
+
+import {RioLoginForm} from '../';
 import {RioUiModule} from '../ui/ui.module';
 import {RioModalModule} from '../modal/modal.module';
 import {RioFormModule} from '../form/form.module';
@@ -21,14 +19,13 @@ import {RioFormModule} from '../form/form.module';
     HttpModule,
     RioUiModule,
     RioModalModule,
-    RioFormModule
+    RioFormModule,
   ],
   declarations: [
-    RioLoginModal,
-    RioLoginForm
+    RioLoginForm,
   ],
   exports: [
-    RioLoginModal
+    RioLoginForm,
   ]
 })
 export class RioLoginModule { }

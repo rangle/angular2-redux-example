@@ -25,6 +25,7 @@ import {
 import {RioCounter} from '../components/counter/counter.component';
 import {RioLoginModule} from '../components/login/login.module';
 import {RioUiModule} from '../components/ui/ui.module';
+import {RioModalModule} from '../components/modal/modal.module';
 import {RioNavigatorModule} from '../components/navigator/navigator.module';
 
 @NgModule({
@@ -37,6 +38,7 @@ import {RioNavigatorModule} from '../components/navigator/navigator.module';
     RioLoginModule,
     RioUiModule,
     RioNavigatorModule,
+    RioModalModule,
     NgReduxModule.forRoot(),
   ],
   declarations: [

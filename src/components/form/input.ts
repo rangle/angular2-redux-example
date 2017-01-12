@@ -17,9 +17,7 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { validate } from './validators';
-
-import { ControlValueAccessor, initializeAccessor } from './value-accessor';
+import { ControlBase } from './control';
 
 @Component({
   selector: 'rio-input',
@@ -46,27 +44,17 @@ import { ControlValueAccessor, initializeAccessor } from './value-accessor';
     multi: true,
   }]
 })
-@ControlValueAccessor<string>()
-export class RioInput {
+export class RioInput extends ControlBase<string> {
   @Input() inputType: string;
   @Input() placeholder: string;
   @Input() qaid: string;
 
-  @ViewChild(NgModel) private model: NgModel;
+  @ViewChild(NgModel) protected model: NgModel;
 
   constructor(
     @Optional() @Inject(NG_VALIDATORS)
-      private validators: Array<Validator | ValidatorFn>,
-    @Optional() @Inject(NG_ASYNC_VALIDATORS)
-      private asyncValidators: Array<Validator | AsyncValidatorFn>
+      validators: Array<Validator | ValidatorFn>
   ) {
-    initializeAccessor(this);
+    super(validators);
   }
-
-  private get invalid(): Observable<boolean> {
-    return validate
-        (this.validators, this.asyncValidators)
-        (this.model.control)
-      .map(v => Object.keys(v || {}).length > 0);
-  }
-};
+}

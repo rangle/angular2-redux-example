@@ -1,41 +1,33 @@
-export const ControlValueAccessor = <T>() => {
-  return target => {
-    Object.assign(target.prototype, {
-        touch: function () {
-          this.touched.forEach(f => f());
-        },
-        writeValue: function (v) {
-          this.innerValue = v;
-        },
-        registerOnChange: function (fn: (value: T) => void) {
-          this.changed.push(fn);
-        },
-        registerOnTouched: function (fn: () => void) {
-          this.touched.push(fn);
-        },
-    });
+export abstract class ValueAccessor<T> {
+  protected innerValue: T;
 
-    Object.defineProperty(target.prototype, 'value', {
-      get: function() {
-        return this.innerValue;
-      },
-      set: function (value) {
-        if (this.innerValue !== value) {
-          this.innerValue = value;
-          this.changed.forEach(f => f(value));
-        }
-      },
-    });
+  protected touched = new Array<() => void>();
+  protected changed = new Array<(value) => void>();
 
-    return target;
-  };
-};
+  get value(): T {
+    return this.innerValue;
+  }
 
-export const initializeAccessor = accessor => {
-  Object.assign(accessor, {
-    touched: new Array<() => void>(),
-    changed: new Array<(value) => void>(),
-    innerValue: null,
-  });
-};
+  set value(value: T) {
+    if (this.innerValue !== value) {
+      this.innerValue = value;
+      this.changed.forEach(f => f(value));
+    }
+  }
 
+  touch() {
+    this.touched.forEach(f => f());
+  }
+
+  writeValue(v) {
+    this.innerValue = v;
+  }
+
+  registerOnChange(fn: (value: T) => void) {
+    this.changed.push(fn);
+  }
+
+  registerOnTouched(fn: () => void) {
+    this.touched.push(fn);
+  }
+}

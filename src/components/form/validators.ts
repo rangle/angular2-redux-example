@@ -1,6 +1,5 @@
 import {
   AbstractControl,
-  AsyncValidatorFn,
   Validator,
   Validators,
   ValidatorFn,
@@ -8,46 +7,49 @@ import {
 
 import { Observable } from 'rxjs';
 
-export type AsyncValidatorArray = Array<Validator | AsyncValidatorFn>;
-
 export type ValidatorArray = Array<Validator | ValidatorFn>;
 
-const normalizeValidator = (validator: Validator | ValidatorFn): ValidatorFn | AsyncValidatorFn => {
-  const func = (validator as Validator).validate.bind(validator);
-  if (typeof func === 'function') {
-    return (c: AbstractControl) => func(c);
-  } else {
-    return <ValidatorFn | AsyncValidatorFn> validator;
-  }
-};
+export type ValidationResult = {[validator: string]: string | boolean};
 
-export const composeValidators = (validators: ValidatorArray): AsyncValidatorFn | ValidatorFn => {
+export const composeValidators = (validators: ValidatorArray): ValidatorFn => {
   if (validators == null || validators.length === 0) {
     return null;
   }
-  return Validators.compose(validators.map(normalizeValidator));
+
+  return Validators.compose(validators.map(v => {
+    return typeof v === 'function'
+      ? v
+      : (c: AbstractControl) => v.validate.bind(v);
+    }));
 };
 
-export const validate =
-    (validators: ValidatorArray, asyncValidators: AsyncValidatorArray) => {
+export const validate = (validators: ValidatorArray) => {
   return (control: AbstractControl) => {
-    const synchronousValid = () => composeValidators(validators)(control);
-
-    if (asyncValidators) {
-      const asyncValidator = composeValidators(asyncValidators);
-
-      return asyncValidator(control).map(v => {
-        const s = synchronousValid(); // both validator styles
-        if (s || v) {
-          return Object.assign({}, s, v);
-        }
-      });
-    }
-
-    if (validators) {
-      return Observable.of(synchronousValid());
+    if (validators &&
+        validators.length > 0) {
+      return Observable.of(composeValidators(validators)(control));
     }
 
     return Observable.of(null);
   };
+};
+
+export const message = (validator: ValidationResult, key: string): string => {
+  switch (key) {
+    case 'required':
+      return 'Please enter a value';
+    case 'pattern':
+      return 'Value does not match required pattern';
+    case 'minlength':
+      return 'Minimum number of characters not met';
+    case 'maxlength':
+      return 'Value exceeds maximum number of characters';
+  }
+
+  switch (typeof validator[key]) {
+    case 'string':
+      return <string> validator[key];
+    default:
+      return `Validation failure (${key})`;
+  }
 };

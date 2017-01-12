@@ -6,10 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     <button
       [attr.data-testid]="testid"
       [id]="qaid"
-      (click)="handleClick($event)"
+      [disabled]="disabled"
+      (click)="onClick($event)"
       type="{{type || 'button'}}"
       class="btn btn-primary {{className}}">
-
       <ng-content></ng-content>
     </button>
   `
@@ -19,9 +19,15 @@ export class RioButton {
   @Input() type: string;
   @Input() qaid: string;
   @Input() testid: string;
-  @Output() onClick = new EventEmitter<any>();
+  @Input() disabled: boolean;
 
-  handleClick(event) {
-    this.onClick.emit(event);
+  @Output() click = new EventEmitter<MouseEvent>();
+
+  private onClick(event: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    this.click.emit(event);
   }
-};
+}
