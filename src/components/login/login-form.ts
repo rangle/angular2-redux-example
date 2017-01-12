@@ -97,9 +97,6 @@ export class RioLoginForm {
 
   @Output() login = new EventEmitter<LoginForm>();
 
-  // Reset login state
-  @Output() reset = new EventEmitter<void>();
-
   @ViewChildren(NgModel) models: QueryList<NgModel>;
 
   username: string;
@@ -112,8 +109,6 @@ export class RioLoginForm {
     if (this.models) {
       this.models.forEach(m => m.control.markAsUntouched());
     }
-
-    this.reset.emit(void 0);
   }
 
   onSubmit(value) {

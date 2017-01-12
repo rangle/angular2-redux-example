@@ -5,8 +5,7 @@
       <rio-login-form
         [isPending]="isLoading$ | async"
         [hasError]="hasError$ | async"
-        (login)="actions.loginUser($event)"
-        (reset)="actions.logoutUser()">
+        (login)="actions.loginUser($event)">
       </rio-login-form>
     </rio-modal-content>
   </rio-modal>
