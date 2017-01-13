@@ -25,6 +25,8 @@ be displayed with each reload.
 
 Open `http://localhost:8080` in your browser.
 
+Login with `admin` / `superuser` (see [server/users.json](https://raw.githubusercontent.com/rangle/angular2-redux-example/master/server/users.json)).
+
 ### Production
 
 ```bash
