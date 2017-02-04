@@ -1,4 +1,4 @@
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/store';
 import { CounterActions } from './counter.actions';
 
 class MockRedux extends NgRedux<any> {

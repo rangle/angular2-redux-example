@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'ng2-redux-router';
+import { routerReducer } from '@angular-redux/router';
 import * as counter from './counter';
 import * as session from './session';
 
