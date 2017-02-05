@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {select} from 'ng2-redux';
+import {select} from '@angular-redux/store';
 import {CounterActions} from '../actions';
 import {ICounter} from '../store';
 
