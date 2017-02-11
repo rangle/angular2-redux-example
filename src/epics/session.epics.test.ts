@@ -50,8 +50,9 @@ describe('SessionEpics', () => {
               new ResponseOptions({
                   body: {
                     meta: {
-                      token: '123',
-                      user: {
+                      id: 'user',
+                      token: 'abcd1234',
+                      profile: {
                         firstName: 'John',
                         lastName: 'Doe'
                       }
@@ -62,14 +63,21 @@ describe('SessionEpics', () => {
             ));
           });
 
-        const action$ = Observable.of({type: SessionActions.LOGIN_USER});
+        const action$ = Observable.of({
+          type: SessionActions.LOGIN_USER,
+          payload: {
+            username: 'user',
+            password: 'pass',
+          },
+        });
         sessionEpics.login(action$)
           .subscribe(
             action => expect(action).toEqual({
               type: SessionActions.LOGIN_USER_SUCCESS,
               payload: {
-                token: '123',
-                user: {
+                id: 'user',
+                token: 'abcd1234',
+                profile: {
                   firstName: 'John',
                   lastName: 'Doe'
                 }
@@ -89,7 +97,14 @@ describe('SessionEpics', () => {
           connection.mockError(new Error('some error'));
         });
 
-      const action$ = Observable.of({type: SessionActions.LOGIN_USER});
+      const action$ = Observable.of({
+        type: SessionActions.LOGIN_USER,
+          payload: {
+            username: 'user',
+            password: 'pass',
+          },
+      });
+
       sessionEpics.login(action$)
         .subscribe(
           action => expect(action).toEqual({

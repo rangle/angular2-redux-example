@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const proxy = require('./server/webpack-dev-proxy');
 const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
 
@@ -92,7 +91,6 @@ const baseConfig = {
 
   devServer: {
     historyApiFallback: { index: '/' },
-    proxy: Object.assign({}, proxy(), { '/api/*': 'http://localhost:3000' }),
   },
 
   module: {
