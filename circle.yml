@@ -10,10 +10,13 @@ dependencies:
     - pip install robotframework==3.0
     - pip install robotframework-requests==0.4.4
     - pip install robotframework-selenium2library==1.7.4
-    # Clean out node-modules to prevent issues with circle-ci's caching.
-    - rm -rf node_modules
+    - npm install -g yarn@0.19.1
+  override:
+    - yarn install
 
 test:
+  override:
+    - yarn test
   post:
     - npm run build
     - npm start:
