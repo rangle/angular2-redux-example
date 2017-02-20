@@ -49,13 +49,11 @@ describe('SessionEpics', () => {
             connection.mockRespond(new Response(
               new ResponseOptions({
                   body: {
-                    meta: {
-                      id: 'user',
-                      token: 'abcd1234',
-                      profile: {
-                        firstName: 'John',
-                        lastName: 'Doe'
-                      }
+                    id: 'user',
+                    token: 'abcd1234',
+                    profile: {
+                      firstName: 'John',
+                      lastName: 'Doe'
                     }
                   }
                 }
@@ -92,9 +90,10 @@ describe('SessionEpics', () => {
       XHRBackend,
       SessionEpics
     ], (mockBackend, sessionEpics) => {
+      const error = new Error('some error');
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
-          connection.mockError(new Error('some error'));
+          connection.mockError(error);
         });
 
       const action$ = Observable.of({
@@ -108,7 +107,8 @@ describe('SessionEpics', () => {
       sessionEpics.login(action$)
         .subscribe(
           action => expect(action).toEqual({
-            type: SessionActions.LOGIN_USER_ERROR
+            type: SessionActions.LOGIN_USER_ERROR,
+            error,
           }));
     })));
 });

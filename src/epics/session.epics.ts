@@ -20,11 +20,11 @@ import 'rxjs/add/operator/do';
 const AUTH_URL = 'https://httpbin.org/basic-auth/user/pass';
 const USER_DATA_URL = 'http://www.mocky.io/v2/58aa539210000034064b6214';
 
-interface IUserData {
+export interface IUserData {
   id: string;
   token: string;
   profile: {
-    firstNam: string;
+    firstName: string;
     lastName: string;
   };
 }
