@@ -9,6 +9,8 @@ It is maintained on an ad-hoc basis, your mileage may vary.
 
 You can see it in action here: angular2-redux-example.herokuapp.com.
 
+Log in with `user/pass`.
+
 ## npm scripts
 
 > To see all available scripts:
@@ -62,14 +64,6 @@ using `npm run lint-ts` and `npm run lint-css`.
 ```bash
 $ npm run cover
 ```
-
-#### Connecting to remote APIs
-
-Both the devmode and production servers provide a way to proxy requests to
-remote HTTP APIs.  This can be useful for working around CORS issues when
-developing your software.
-
-Edit [this file](server/proxy-config.js) to mount such APIs at a given path.
 
 ## Improvements
 

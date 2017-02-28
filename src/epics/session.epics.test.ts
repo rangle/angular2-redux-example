@@ -49,12 +49,11 @@ describe('SessionEpics', () => {
             connection.mockRespond(new Response(
               new ResponseOptions({
                   body: {
-                    meta: {
-                      token: '123',
-                      user: {
-                        firstName: 'John',
-                        lastName: 'Doe'
-                      }
+                    id: 'user',
+                    token: 'abcd1234',
+                    profile: {
+                      firstName: 'John',
+                      lastName: 'Doe'
                     }
                   }
                 }
@@ -62,14 +61,21 @@ describe('SessionEpics', () => {
             ));
           });
 
-        const action$ = Observable.of({type: SessionActions.LOGIN_USER});
+        const action$ = Observable.of({
+          type: SessionActions.LOGIN_USER,
+          payload: {
+            username: 'user',
+            password: 'pass',
+          },
+        });
         sessionEpics.login(action$)
           .subscribe(
             action => expect(action).toEqual({
               type: SessionActions.LOGIN_USER_SUCCESS,
               payload: {
-                token: '123',
-                user: {
+                id: 'user',
+                token: 'abcd1234',
+                profile: {
                   firstName: 'John',
                   lastName: 'Doe'
                 }
@@ -84,16 +90,25 @@ describe('SessionEpics', () => {
       XHRBackend,
       SessionEpics
     ], (mockBackend, sessionEpics) => {
+      const error = new Error('some error');
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
-          connection.mockError(new Error('some error'));
+          connection.mockError(error);
         });
 
-      const action$ = Observable.of({type: SessionActions.LOGIN_USER});
+      const action$ = Observable.of({
+        type: SessionActions.LOGIN_USER,
+          payload: {
+            username: 'user',
+            password: 'pass',
+          },
+      });
+
       sessionEpics.login(action$)
         .subscribe(
           action => expect(action).toEqual({
-            type: SessionActions.LOGIN_USER_ERROR
+            type: SessionActions.LOGIN_USER_ERROR,
+            error,
           }));
     })));
 });

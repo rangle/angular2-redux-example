@@ -16,9 +16,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "clean": "rimraf dist/",
     "cover": "istanbul report --include=**/chrome/coverage-final.json text text-summary",
-    "dev:server": "cross-env NODE_ENV=development PORT=3000 nodemon server/node-server.js",
-    "dev:client": "cross-env NODE_ENV=development webpack-dev-server -d --devtool=inline-source-map --inline --progress --no-info",
-    "dev": "concurrently -r \"npm run dev:client\" \"npm run dev:server\"",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server -d --devtool=inline-source-map --inline --progress --no-info",
     "lint": "npm run lint-ts && npm run lint-js && npm run lint-css",
     "lint-css": "stylelint './src/**/*.css'",
     "lint-ts": "tslint './src/**/*.ts'",
@@ -37,12 +35,7 @@
   "bugs": {
     "url": "https://github.com/rangle/rangle-starter/issues"
   },
-  "dependencies": {
-    "express": "^4.13.4",
-    "helmet": "^2.0.0",
-    "http-proxy": "^1.13.2",
-    "winston": "^2.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular-redux/router": "^6.0.0",
     "@angular-redux/store": "^6.0.0",
@@ -99,9 +92,6 @@
     "karma-sourcemap-writer": "^0.1.2",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
-    "nodemon": "^1.9.2",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "8.0.2",
     "postcss-loader": "^0.9.1",
